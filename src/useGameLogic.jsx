@@ -31,7 +31,7 @@ export default function useGameLogic() {
     };
 
     const generateInitialBlockArrayAndSelectedIndex = () => {
-        const blockArray = shuffleArray(Array.from({ length: 20 }, (_, i) => [i + 1]));
+        const blockArray = shuffleArray(Array.from({ length: 5 }, (_, i) => [i + 1]));
         const selectedBlockIndex = 0;
         return joinAdjacentBlocks(blockArray, selectedBlockIndex);
     };
@@ -150,6 +150,10 @@ export default function useGameLogic() {
 
     }
 
+    const isGameFinished = (blockArray) => {
+        return blockArray.length === 1;
+    }
+
 
 
     return {
@@ -159,6 +163,7 @@ export default function useGameLogic() {
         joinAdjacentBlocks,
         handleLeftArrow,
         handleRightArrow,
-        handleSelectionButton
+        handleSelectionButton,
+        isGameFinished
     };
 }
