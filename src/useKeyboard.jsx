@@ -2,10 +2,14 @@ import { useEffect } from "react";
 
 export function useKeyboard({
     key,
-    onKeyPressed
+    onKeyPressed,
 }) {
+
     useEffect(() => {
         function keyDownHandler(e) {
+            if (!key) {
+                onKeyPressed();
+            }
             if (e.key === key) {
                 e.preventDefault();
                 onKeyPressed();
@@ -20,4 +24,6 @@ export function useKeyboard({
         };
     }, []);
 }
+
+
 

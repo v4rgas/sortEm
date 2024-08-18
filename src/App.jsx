@@ -9,16 +9,23 @@ import useState from 'react-usestateref';
 
 function App() {
 
-  const { generateInitialBlockArrayAndSelectedIndex, moveSelectedBlockRight, joinAdjacentBlocks, moveSelectedBlockLeft, handleLeftArrow, handleRightArrow, handleSelectionButton } = useGameLogic();
+  const { generateInitialBlockArrayAndSelectedIndex, handleLeftArrow, handleRightArrow, handleSelectionButton } = useGameLogic();
 
   const [blockArray, setBlockArray, blockArrayRef] = useState([]);
   const [selectedBlockIndex, setSelectedBlockIndex, selectedBlockIndexRef] = useState(0);
   const [selected, setSelected, selectedRef] = useState(false);
+  const [gameStarted, setGameStarted, gameStartedRef] = useState(false);
 
   const updateGameState = ({ blockArray, selectedBlockIndex }) => {
     setBlockArray(blockArray);
     setSelectedBlockIndex(selectedBlockIndex);
   }
+
+  useKeyboard({
+    onKeyPressed: useCallback(() => {
+      setGameStarted(true);
+    }, [setGameStarted])
+  });
 
   useKeyboard({
     key: "ArrowRight",
@@ -48,6 +55,7 @@ function App() {
 
 
 
+
   useEffect(() => {
     const { blockArray, selectedBlockIndex } = generateInitialBlockArrayAndSelectedIndex();
     updateGameState({ blockArray, selectedBlockIndex });
@@ -57,16 +65,20 @@ function App() {
 
 
   return (
-    <div className='flex'>
-      {blockArray.map((numbers, index) => (
-        <NumberBlock
-          key={index}
-          numbers={numbers}
-          selected={selectedBlockIndex == index && selected}
-          hovered={selectedBlockIndex == index && !selected}>
-        </NumberBlock>
-      ))}
-    </div>
+    <>
+      <span hidden={gameStarted}>move left: ← move right: → select: S</span>
+      <div className='flex'>
+        {blockArray.map((numbers, index) => (
+          <NumberBlock
+            key={index}
+            numbers={numbers}
+            selected={selectedBlockIndex == index && selected}
+            hovered={selectedBlockIndex == index && !selected}>
+          </NumberBlock>
+        ))}
+
+      </div>
+    </>
   )
 }
 
