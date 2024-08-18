@@ -19,8 +19,8 @@ export default function Time({ started, paused }) {
         }, [started, paused]
     )
     return (
-        <div>
-            <h1>{(elapsedTime / 100).toFixed(2)}</h1>
-        </div>
+
+        <h1>{(elapsedTime / 100).toFixed(2)}</h1>
+
     )
 }

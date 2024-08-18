@@ -62,25 +62,25 @@ function App() {
   // });
 
   useKeyboard({
-    key: "ArrowRight",
+    key: ["ArrowRight", 'L', 'l'],
     preventRepeat: true,
     onKeyPressed: onRightArrow
   });
 
   useKeyboard({
-    key: "ArrowLeft",
+    key: ["ArrowLeft", 'H', 'h'],
     preventRepeat: true,
     onKeyPressed: onLeftArrow
   });
 
   useKeyboard({
-    key: "s",
+    key: ["s", "S"],
     preventRepeat: true,
     onKeyPressed: onSelectionButton
   });
 
   useKeyboard({
-    key: "r",
+    key: ["r", "R"],
     preventRepeat: true,
     onKeyPressed: () => { window.location.reload() }
   });
@@ -96,12 +96,8 @@ function App() {
     ref(document);
     return () => {
       ref({});
-
     }
   })
-
-
-
 
   useEffect(() => {
     const { blockArray, selectedBlockIndex } = generateInitialBlockArrayAndSelectedIndex();
@@ -123,8 +119,8 @@ function App() {
 
       <BrowserView>
         <span className='instructions' hidden={gameStarted}>
-          Move left: ← <br />
-          Move right: → <br />
+          Move left: ← or H <br />
+          Move right: → or L<br />
           Select and drop: S <br />
           Restart: R
         </span>

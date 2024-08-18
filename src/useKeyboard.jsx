@@ -11,12 +11,20 @@ export function useKeyboard({
             if (preventRepeat && e.repeat) {
                 return;
             }
-            if (!key) {
-                onKeyPressed();
-            }
-            if (e.key === key) {
-                e.preventDefault();
-                onKeyPressed();
+
+            if (Array.isArray(key)) {
+                if (key.includes(e.key)) {
+                    e.preventDefault();
+                    onKeyPressed(e.key);
+                }
+            } else {
+                if (!key) {
+                    onKeyPressed(e.key);
+                }
+                if (e.key === key) {
+                    e.preventDefault();
+                    onKeyPressed(e.key);
+                }
             }
         }
 
@@ -24,10 +32,6 @@ export function useKeyboard({
 
         return () => {
             document.removeEventListener("keydown", keyDownHandler);
-
         };
-    }, []);
+    }, [key, onKeyPressed, preventRepeat]);
 }
-
-
-

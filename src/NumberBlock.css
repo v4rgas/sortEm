@@ -1,7 +1,6 @@
 .number-block {
     font-weight: bold;
     background-color: rgb(235, 235, 235);
-    color: #333;
     text-align: center;
     padding: 1rem;
     border-radius: 0.5rem;
@@ -10,7 +9,7 @@
     display: flex;
     width: fit-content;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     gap: 3rem;
     transition: all 0.1s;
     flex-grow: 1;
