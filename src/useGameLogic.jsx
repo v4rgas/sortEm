@@ -23,16 +23,13 @@ export default function useGameLogic() {
 
         for (let i = 1; i < arr.length; i++) {
             if (arr[i].length > 0 && (currentBlock.length === 0 || arr[i][0] === currentBlock[currentBlock.length - 1] + 1)) {
-                // Merge currentBlock with arr[i]
                 currentBlock = currentBlock.concat(arr[i]);
             } else {
-                // Push the currentBlock to result and start a new one
                 result.push(currentBlock);
                 currentBlock = arr[i];
             }
         }
 
-        // Push the last block
         result.push(currentBlock);
 
         return result;
