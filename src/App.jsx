@@ -15,7 +15,7 @@ function App() {
   const { generateInitialBlockArrayAndSelectedIndex, handleLeftArrow, handleRightArrow, handleSelectionButton, isGameFinished, handleGameFinished } = useGameLogic();
 
   const [blockArray, setBlockArray, blockArrayRef] = useState([]);
-  const [selectedBlockIndex, setSelectedBlockIndex, selectedBlockIndexRef] = useState(0);
+  const [focusedBlockIndex, setfocusedBlockIndex, focusedBlockIndexRef] = useState(0);
   const [selected, setSelected, selectedRef] = useState(false);
   const [gameStarted, setGameStarted, gameStartedRef] = useState(false);
 
@@ -24,9 +24,9 @@ function App() {
 
 
 
-  const updateGameState = ({ blockArray, selectedBlockIndex }) => {
+  const updateGameState = ({ blockArray, focusedBlockIndex }) => {
     setBlockArray(blockArray);
-    setSelectedBlockIndex(selectedBlockIndex);
+    setfocusedBlockIndex(focusedBlockIndex);
     if (isGameFinished(blockArray)) {
       console.log('Game finished');
       setGameStarted(false);
@@ -37,19 +37,19 @@ function App() {
 
   const onRightArrow = () => {
     setGameStarted(true)
-    const newGameState = handleRightArrow(blockArrayRef.current, selectedBlockIndexRef.current, selectedRef.current);
+    const newGameState = handleRightArrow(blockArrayRef.current, focusedBlockIndexRef.current, selectedRef.current);
     updateGameState(newGameState);
   }
 
   const onLeftArrow = () => {
     setGameStarted(true)
-    const newGameState = handleLeftArrow(blockArrayRef.current, selectedBlockIndexRef.current, selectedRef.current);
+    const newGameState = handleLeftArrow(blockArrayRef.current, focusedBlockIndexRef.current, selectedRef.current);
     updateGameState(newGameState);
   }
 
   const onSelectionButton = () => {
     setGameStarted(true)
-    const newGameState = handleSelectionButton(blockArrayRef.current, selectedBlockIndexRef.current, selectedRef.current);
+    const newGameState = handleSelectionButton(blockArrayRef.current, focusedBlockIndexRef.current, selectedRef.current);
     setSelected(newGameState.selected);
     updateGameState(newGameState);
   }
@@ -100,8 +100,8 @@ function App() {
   })
 
   useEffect(() => {
-    const { blockArray, selectedBlockIndex } = generateInitialBlockArrayAndSelectedIndex();
-    updateGameState({ blockArray, selectedBlockIndex });
+    const { blockArray, focusedBlockIndex } = generateInitialBlockArrayAndSelectedIndex();
+    updateGameState({ blockArray, focusedBlockIndex });
   }, [])
 
 
@@ -135,8 +135,8 @@ function App() {
           <NumberBlock
             key={index}
             numbers={numbers}
-            selected={selectedBlockIndex == index && selected}
-            hovered={selectedBlockIndex == index && !selected}>
+            selected={focusedBlockIndex == index && selected}
+            hovered={focusedBlockIndex == index && !selected}>
           </NumberBlock>
         ))}
       </div>

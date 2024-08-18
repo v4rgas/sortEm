@@ -18,8 +18,8 @@ export default function useGameLogic() {
 
     const generateInitialBlockArrayAndSelectedIndex = () => {
         const blockArray = shuffleArray(Array.from({ length: 20 }, (_, i) => [i + 1]));
-        const selectedBlockIndex = 0;
-        return joinAdjacentBlocks(blockArray, selectedBlockIndex);
+        const focusedBlockIndex = 0;
+        return joinAdjacentBlocks(blockArray, focusedBlockIndex);
     };
 
     function playMp3(audioSrc) {
@@ -57,53 +57,53 @@ export default function useGameLogic() {
         return result;
     }
 
-    const joinAdjacentBlocks = (blockArray, selectedBlockIndex) => {
+    const joinAdjacentBlocks = (blockArray, focusedBlockIndex) => {
         let newBlockArray = mergeAdjacentBlocks(blockArray);
-        const currentSelectedBlockValue = blockArray[selectedBlockIndex][0];
+        const currentSelectedBlockValue = blockArray[focusedBlockIndex][0];
         console.log(blockArray, newBlockArray)
 
-        const newSelectedBlockIndex = newBlockArray.findIndex((block) => block.includes(currentSelectedBlockValue));
+        const newfocusedBlockIndex = newBlockArray.findIndex((block) => block.includes(currentSelectedBlockValue));
 
         return {
             blockArray: newBlockArray,
-            selectedBlockIndex: newSelectedBlockIndex
+            focusedBlockIndex: newfocusedBlockIndex
         };
     };
 
 
-    const moveSelectedBlockRight = (blockArray, selectedBlockIndex) => {
-        if (selectedBlockIndex < blockArray.length - 1) {
+    const moveSelectedBlockRight = (blockArray, focusedBlockIndex) => {
+        if (focusedBlockIndex < blockArray.length - 1) {
             const newBlockArray = [...blockArray];
-            [newBlockArray[selectedBlockIndex], newBlockArray[selectedBlockIndex + 1]] =
-                [newBlockArray[selectedBlockIndex + 1], newBlockArray[selectedBlockIndex]];
+            [newBlockArray[focusedBlockIndex], newBlockArray[focusedBlockIndex + 1]] =
+                [newBlockArray[focusedBlockIndex + 1], newBlockArray[focusedBlockIndex]];
 
             return {
                 blockArray: newBlockArray,
-                selectedBlockIndex: selectedBlockIndex + 1
+                focusedBlockIndex: focusedBlockIndex + 1
             };
         }
         return {
             blockArray,
-            selectedBlockIndex
+            focusedBlockIndex
         };
 
 
     };
 
-    const moveSelectedBlockLeft = (blockArray, selectedBlockIndex) => {
-        if (selectedBlockIndex > 0) {
+    const moveSelectedBlockLeft = (blockArray, focusedBlockIndex) => {
+        if (focusedBlockIndex > 0) {
             const newBlockArray = [...blockArray];
-            [newBlockArray[selectedBlockIndex], newBlockArray[selectedBlockIndex - 1]] =
-                [newBlockArray[selectedBlockIndex - 1], newBlockArray[selectedBlockIndex]];
+            [newBlockArray[focusedBlockIndex], newBlockArray[focusedBlockIndex - 1]] =
+                [newBlockArray[focusedBlockIndex - 1], newBlockArray[focusedBlockIndex]];
 
             return {
                 blockArray: newBlockArray,
-                selectedBlockIndex: selectedBlockIndex - 1
+                focusedBlockIndex: focusedBlockIndex - 1
             };
         }
         return {
             blockArray,
-            selectedBlockIndex
+            focusedBlockIndex
         };
 
     };
@@ -111,36 +111,36 @@ export default function useGameLogic() {
 
 
 
-    const handleLeftArrow = (blockArray, selectedBlockIndex, isBlockSelected) => {
+    const handleLeftArrow = (blockArray, focusedBlockIndex, isBlockSelected) => {
         playClickSound();
         if (isBlockSelected)
-            return moveSelectedBlockLeft(blockArray, selectedBlockIndex);
+            return moveSelectedBlockLeft(blockArray, focusedBlockIndex);
         else
             return {
                 blockArray,
-                selectedBlockIndex: selectedBlockIndex > 0 ? selectedBlockIndex - 1 : selectedBlockIndex
+                focusedBlockIndex: focusedBlockIndex > 0 ? focusedBlockIndex - 1 : focusedBlockIndex
             };
     }
 
-    const handleRightArrow = (blockArray, selectedBlockIndex, isBlockSelected) => {
+    const handleRightArrow = (blockArray, focusedBlockIndex, isBlockSelected) => {
         playClickSound();
         if (isBlockSelected)
-            return moveSelectedBlockRight(blockArray, selectedBlockIndex);
+            return moveSelectedBlockRight(blockArray, focusedBlockIndex);
         else
             return {
                 blockArray,
-                selectedBlockIndex: selectedBlockIndex < blockArray.length - 1 ? selectedBlockIndex + 1 : selectedBlockIndex
+                focusedBlockIndex: focusedBlockIndex < blockArray.length - 1 ? focusedBlockIndex + 1 : focusedBlockIndex
             };
     }
 
-    const handleSelectionButton = (blockArray, selectedBlockIndex, selected) => {
+    const handleSelectionButton = (blockArray, focusedBlockIndex, selected) => {
         playSelectionSound()
         if (selected)
-            return { ...joinAdjacentBlocks(blockArray, selectedBlockIndex), selected: !selected };
+            return { ...joinAdjacentBlocks(blockArray, focusedBlockIndex), selected: !selected };
         else
             return {
                 blockArray,
-                selectedBlockIndex,
+                focusedBlockIndex,
                 selected: !selected
             };
 
