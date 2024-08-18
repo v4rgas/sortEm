@@ -66,7 +66,7 @@ function App() {
 
   return (
     <>
-      <span hidden={gameStarted}>move left: ← move right: → select: S</span>
+      <span className='instructions' hidden={gameStarted}>move left: ← move right: → select and drop: S</span>
       <div className='flex'>
         {blockArray.map((numbers, index) => (
           <NumberBlock

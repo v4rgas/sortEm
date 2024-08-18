@@ -11,3 +11,7 @@
   gap: 1rem;
   flex-wrap: wrap;
 }
+
+.instructions {
+  font-size: 1rem;
+}
