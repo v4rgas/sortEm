@@ -1,3 +1,5 @@
+import clickSound from './assets/click.mp3';
+import selectionSound from './assets/selection.mp3';
 import { useState } from "react";
 
 export default function useGameLogic() {
@@ -8,6 +10,11 @@ export default function useGameLogic() {
         // joinAdjacentBlocks(blockArray, selectedBlockIndex);
         return joinAdjacentBlocks(blockArray, selectedBlockIndex);
     };
+
+    function playMp3(audioSrc) {
+        const audio = new Audio(audioSrc);
+        audio.play();
+    }
 
     function mergeAdjacentBlocks(arr) {
         if (arr.length === 0) return [];
@@ -87,6 +94,7 @@ export default function useGameLogic() {
 
 
     const handleLeftArrow = (blockArray, selectedBlockIndex, isBlockSelected) => {
+        playMp3(clickSound);
         if (isBlockSelected)
             return moveSelectedBlockLeft(blockArray, selectedBlockIndex);
         else
@@ -97,6 +105,7 @@ export default function useGameLogic() {
     }
 
     const handleRightArrow = (blockArray, selectedBlockIndex, isBlockSelected) => {
+        playMp3(clickSound);
         if (isBlockSelected)
             return moveSelectedBlockRight(blockArray, selectedBlockIndex);
         else
@@ -107,6 +116,7 @@ export default function useGameLogic() {
     }
 
     const handleSelectionButton = (blockArray, selectedBlockIndex, selected) => {
+        playMp3(selectionSound);
         if (selected)
             return { ...joinAdjacentBlocks(blockArray, selectedBlockIndex), selected: !selected };
         else

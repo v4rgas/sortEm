@@ -16,6 +16,8 @@ export function useKeyboard({
 
         return () => {
             document.removeEventListener("keydown", keyDownHandler);
+
         };
     }, []);
 }
+
