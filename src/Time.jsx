@@ -14,13 +14,13 @@ export default function Time({ started, paused }) {
                 } else
                     setElapsedTime((time) => time + 1);
 
-            }, 100);
+            }, 10);
             return () => clearInterval(interval);
         }, [started, paused]
     )
     return (
         <div>
-            <h1>{(elapsedTime / 100).toFixed(3)}</h1>
+            <h1>{(elapsedTime / 100).toFixed(2)}</h1>
         </div>
     )
 }
