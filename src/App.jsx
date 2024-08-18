@@ -6,6 +6,7 @@ import NumberBlock from './NumberBlock'
 import useGameLogic from './useGameLogic';
 import { useKeyboard } from './useKeyboard';
 import useState from 'react-usestateref';
+import { useSwipeable } from 'react-swipeable';
 
 function App() {
 
@@ -16,10 +17,29 @@ function App() {
   const [selected, setSelected, selectedRef] = useState(false);
   const [gameStarted, setGameStarted, gameStartedRef] = useState(false);
 
+
+
   const updateGameState = ({ blockArray, selectedBlockIndex }) => {
     setBlockArray(blockArray);
     setSelectedBlockIndex(selectedBlockIndex);
   }
+
+  const onRightArrow = () => {
+    const newGameState = handleRightArrow(blockArrayRef.current, selectedBlockIndexRef.current, selectedRef.current);
+    updateGameState(newGameState);
+  }
+
+  const onLeftArrow = () => {
+    const newGameState = handleLeftArrow(blockArrayRef.current, selectedBlockIndexRef.current, selectedRef.current);
+    updateGameState(newGameState);
+  }
+
+  const onSelectionButton = () => {
+    const newGameState = handleSelectionButton(blockArrayRef.current, selectedBlockIndexRef.current, selectedRef.current);
+    setSelected(newGameState.selected);
+    updateGameState(newGameState);
+  }
+
 
   useKeyboard({
     onKeyPressed: useCallback(() => {
@@ -29,27 +49,23 @@ function App() {
 
   useKeyboard({
     key: "ArrowRight",
-    onKeyPressed: () => {
-      const newGameState = handleRightArrow(blockArrayRef.current, selectedBlockIndexRef.current, selectedRef.current);
-      updateGameState(newGameState);
-    }
+    onKeyPressed: onRightArrow
   });
 
   useKeyboard({
     key: "ArrowLeft",
-    onKeyPressed: () => {
-      const newGameState = handleLeftArrow(blockArrayRef.current, selectedBlockIndexRef.current, selectedRef.current);
-      updateGameState(newGameState);
-    }
+    onKeyPressed: onLeftArrow
   });
 
   useKeyboard({
     key: "s",
-    onKeyPressed: () => {
-      const newGameState = handleSelectionButton(blockArrayRef.current, selectedBlockIndexRef.current, selectedRef.current);
-      setSelected(newGameState.selected);
-      updateGameState(newGameState);
-    }
+    onKeyPressed: onSelectionButton
+  });
+
+  useSwipeable({
+    onSwipedLeft: onLeftArrow,
+    onSwipedRight: onRightArrow,
+    onTap: onSelectionButton,
   });
 
 
@@ -67,6 +83,7 @@ function App() {
   return (
     <>
       <span className='instructions' hidden={gameStarted}>move left: ← move right: → select and drop: S</span>
+      {/* <span>Timer { }</span> */}
       <div className='flex'>
         {blockArray.map((numbers, index) => (
           <NumberBlock
@@ -76,7 +93,6 @@ function App() {
             hovered={selectedBlockIndex == index && !selected}>
           </NumberBlock>
         ))}
-
       </div>
     </>
   )
