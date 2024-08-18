@@ -3,10 +3,14 @@ import { useEffect } from "react";
 export function useKeyboard({
     key,
     onKeyPressed,
+    preventRepeat = false,
 }) {
 
     useEffect(() => {
         function keyDownHandler(e) {
+            if (preventRepeat && e.repeat) {
+                return;
+            }
             if (!key) {
                 onKeyPressed();
             }

@@ -50,16 +50,19 @@ function App() {
 
   useKeyboard({
     key: "ArrowRight",
+    preventRepeat: true,
     onKeyPressed: onRightArrow
   });
 
   useKeyboard({
     key: "ArrowLeft",
+    preventRepeat: true,
     onKeyPressed: onLeftArrow
   });
 
   useKeyboard({
     key: "s",
+    preventRepeat: true,
     onKeyPressed: onSelectionButton
   });
 
