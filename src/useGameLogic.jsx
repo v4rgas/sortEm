@@ -1,11 +1,37 @@
 import clickSound from './assets/click.mp3';
 import selectionSound from './assets/selection.mp3';
-import { useState } from "react";
 
 export default function useGameLogic() {
+    const shuffleArray = (array) => {
+        const shuffledArray = [];
+        let lastSelectedItem = null;
+
+        while (array.length > 0) {
+            const validIndices = array.map((item, index) => {
+                if (lastSelectedItem === null || Math.abs(item - lastSelectedItem) > 1) {
+                    return index;
+                }
+                return null;
+            }).filter(index => index !== null);
+
+            if (validIndices.length === 0) {
+                shuffledArray.push(array.pop());
+                break;
+            }
+
+            const randomIndex = validIndices[Math.floor(Math.random() * validIndices.length)];
+            const selectedItem = array[randomIndex];
+
+            shuffledArray.push(selectedItem);
+            lastSelectedItem = selectedItem;
+            array.splice(randomIndex, 1);
+        }
+
+        return shuffledArray;
+    };
+
     const generateInitialBlockArrayAndSelectedIndex = () => {
-        const blockArray = Array.from({ length: 20 }, (_, i) => [i + 1])
-            .sort(() => Math.random() - 0.5);
+        const blockArray = shuffleArray(Array.from({ length: 20 }, (_, i) => [i + 1]));
         const selectedBlockIndex = 0;
         return joinAdjacentBlocks(blockArray, selectedBlockIndex);
     };
