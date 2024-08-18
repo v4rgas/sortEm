@@ -1,0 +1,21 @@
+.number-block {
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    color: #333;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    flex-direction: row;
+    display: flex;
+    width: fit-content;
+    gap: 3rem;
+}
+
+.hovered {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.selected {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
