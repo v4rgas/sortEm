@@ -1,5 +1,6 @@
 import './App.css'
 
+import { BrowserView, MobileOnlyView } from 'react-device-detect';
 import { useCallback, useEffect } from 'react';
 
 import NumberBlock from './NumberBlock'
@@ -62,12 +63,20 @@ function App() {
     onKeyPressed: onSelectionButton
   });
 
-  useSwipeable({
+  const { ref } = useSwipeable({
+    onTouchStartOrOnMouseDown: () => setGameStarted(true),
     onSwipedLeft: onLeftArrow,
     onSwipedRight: onRightArrow,
     onTap: onSelectionButton,
   });
 
+  useEffect(() => {
+    ref(document);
+    return () => {
+      ref({});
+
+    }
+  })
 
 
 
@@ -82,7 +91,22 @@ function App() {
 
   return (
     <>
-      <span className='instructions' hidden={gameStarted}>move left: ← move right: → select and drop: S</span>
+      <MobileOnlyView>
+        <span className='instructions' hidden={gameStarted}>
+          Move left: swipe left; <br />
+          Move right: swipe right; <br />
+          Select and drop: tap
+        </span>
+      </MobileOnlyView>
+
+      <BrowserView>
+        <span className='instructions' hidden={gameStarted}>
+          Move left: ← <br />
+          Move right: → <br />
+          Select and drop: S
+        </span>
+      </BrowserView>
+
       {/* <span>Timer { }</span> */}
       <div className='flex'>
         {blockArray.map((numbers, index) => (
