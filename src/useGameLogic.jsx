@@ -11,10 +11,30 @@ import selectionSound4 from './assets/penclicks/Audio 4.mp3';
 import winSound from './assets/win.mp3';
 
 export default function useGameLogic() {
+    function shuffleArray(array) {
+        let a = [...array];
+        let n = a.length;
+        for (let i = n - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            if (a[j] + 1 === a[i + 1]) { // a swap is going to violate the rule at i/i+1
+                // Triple rotation at j, i, i+1 (or, when j == i, swap at i, i+1)
+                a[j] = a[i];
+                a[i] = a[i + 1]--;
+            } else { // standard swap
+                let temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+        // Finally check first two values:
+        if (a[0] + 1 === a[1]) {
+            let temp = a[0];
+            a[0] = a[1];
+            a[1] = temp;
+        }
+        return a;
+    }
 
-    const shuffleArray = (array) => {
-        return array.sort(() => Math.random() - 0.5);
-    };
 
     const generateInitialBlockArrayAndSelectedIndex = () => {
         const blockArray = shuffleArray(Array.from({ length: 20 }, (_, i) => [i + 1]));
