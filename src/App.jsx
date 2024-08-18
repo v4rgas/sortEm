@@ -3,10 +3,10 @@ import './App.css'
 import { BrowserView, MobileOnlyView } from 'react-device-detect';
 import { useCallback, useEffect } from 'react';
 
-import NumberBlock from './NumberBlock'
+import NumberBlock from './BaseGame/NumberBlock'
 import Time from './Time';
-import useGameLogic from './useGameLogic';
-import { useKeyboard } from './useKeyboard';
+import useGameLogic from './BaseGame/useGameLogic';
+import { useKeyboard } from './BaseGame/useKeyboard';
 import useState from 'react-usestateref';
 import { useSwipeable } from 'react-swipeable';
 

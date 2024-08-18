@@ -1,10 +1,31 @@
+import './index.css'
+
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+
+import App from './App.jsx'
+import Multiplayer from './Multiplayer.jsx'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />
+    },
+    {
+      path: '/m/:id',
+      element: <Multiplayer />
+    },
+    {
+      path: '/m',
+      element: <Multiplayer />
+    }
+  ], { basename: '/sortEm' }
+)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )

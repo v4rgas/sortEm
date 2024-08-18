@@ -1,14 +1,14 @@
 // import click1Sound from './assets/click1.mp3';
-import clickSound from './assets/keyboard/Audio 1.mp3';
-import clickSound2 from './assets/keyboard/Audio 2.mp3';
-import clickSound3 from './assets/keyboard/Audio 3.mp3';
-import clickSound4 from './assets/keyboard/Audio 4.mp3';
-import clickSound5 from './assets/keyboard/Audio 5.mp3';
-import selectionSound from './assets/penclicks/Audio 1.mp3';
-import selectionSound2 from './assets/penclicks/Audio 2.mp3';
-import selectionSound3 from './assets/penclicks/Audio 3.mp3';
-import selectionSound4 from './assets/penclicks/Audio 4.mp3';
-import winSound from './assets/win.mp3';
+import clickSound from '../assets/keyboard/Audio 1.mp3';
+import clickSound2 from '../assets/keyboard/Audio 2.mp3';
+import clickSound3 from '../assets/keyboard/Audio 3.mp3';
+import clickSound4 from '../assets/keyboard/Audio 4.mp3';
+import clickSound5 from '../assets/keyboard/Audio 5.mp3';
+import selectionSound from '../assets/penclicks/Audio 1.mp3';
+import selectionSound2 from '../assets/penclicks/Audio 2.mp3';
+import selectionSound3 from '../assets/penclicks/Audio 3.mp3';
+import selectionSound4 from '../assets/penclicks/Audio 4.mp3';
+import winSound from '../assets/win.mp3';
 
 export default function useGameLogic() {
     function shuffleArray(array) {
