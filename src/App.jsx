@@ -107,7 +107,6 @@ function App() {
         </span>
       </BrowserView>
 
-      {/* <span>Timer { }</span> */}
       <div className='flex'>
         {blockArray.map((numbers, index) => (
           <NumberBlock
