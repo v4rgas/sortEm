@@ -18,6 +18,7 @@ function App() {
   const [focusedBlockIndex, setfocusedBlockIndex, focusedBlockIndexRef] = useState(0);
   const [selected, setSelected, selectedRef] = useState(false);
   const [gameStarted, setGameStarted, gameStartedRef] = useState(false);
+  const [gameEnded, setGameEnded, gameEndedRef] = useState(false);
 
 
 
@@ -29,7 +30,7 @@ function App() {
     setfocusedBlockIndex(focusedBlockIndex);
     if (isGameFinished(blockArray)) {
       console.log('Game finished');
-      setGameStarted(false);
+      setGameEnded(true);
       handleGameFinished();
     }
     console.log(isGameFinished(blockArray));
@@ -118,7 +119,7 @@ function App() {
       </MobileOnlyView>
 
       <BrowserView>
-        <span className='instructions' hidden={gameStarted}>
+        <span className='instructions' hidden={gameStarted && !gameEnded}>
           Move left: ← or H <br />
           Move right: → or L<br />
           Select and drop: S <br />
@@ -126,7 +127,7 @@ function App() {
         </span>
       </BrowserView>
 
-      <Time started={gameStarted} paused={!gameStarted}></Time>
+      <Time started={gameStarted} paused={gameEnded}></Time>
 
 
 
