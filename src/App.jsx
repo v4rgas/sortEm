@@ -12,7 +12,7 @@ import { useSwipeable } from 'react-swipeable';
 
 function App() {
 
-  const { generateInitialBlockArrayAndSelectedIndex, handleLeftArrow, handleRightArrow, handleSelectionButton, isGameFinished } = useGameLogic();
+  const { generateInitialBlockArrayAndSelectedIndex, handleLeftArrow, handleRightArrow, handleSelectionButton, isGameFinished, handleGameFinished } = useGameLogic();
 
   const [blockArray, setBlockArray, blockArrayRef] = useState([]);
   const [selectedBlockIndex, setSelectedBlockIndex, selectedBlockIndexRef] = useState(0);
@@ -30,6 +30,7 @@ function App() {
     if (isGameFinished(blockArray)) {
       console.log('Game finished');
       setGameStarted(false);
+      handleGameFinished();
     }
     console.log(isGameFinished(blockArray));
   }

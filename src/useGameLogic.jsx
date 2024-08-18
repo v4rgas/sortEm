@@ -1,37 +1,23 @@
-import clickSound from './assets/click.mp3';
-import selectionSound from './assets/selection.mp3';
+// import click1Sound from './assets/click1.mp3';
+import clickSound from './assets/keyboard/Audio 1.mp3';
+import clickSound2 from './assets/keyboard/Audio 2.mp3';
+import clickSound3 from './assets/keyboard/Audio 3.mp3';
+import clickSound4 from './assets/keyboard/Audio 4.mp3';
+import clickSound5 from './assets/keyboard/Audio 5.mp3';
+import selectionSound from './assets/penclicks/Audio 1.mp3';
+import selectionSound2 from './assets/penclicks/Audio 2.mp3';
+import selectionSound3 from './assets/penclicks/Audio 3.mp3';
+import selectionSound4 from './assets/penclicks/Audio 4.mp3';
+import winSound from './assets/win.mp3';
 
 export default function useGameLogic() {
+
     const shuffleArray = (array) => {
-        const shuffledArray = [];
-        let lastSelectedItem = null;
-
-        while (array.length > 0) {
-            const validIndices = array.map((item, index) => {
-                if (lastSelectedItem === null || Math.abs(item - lastSelectedItem) > 1) {
-                    return index;
-                }
-                return null;
-            }).filter(index => index !== null);
-
-            if (validIndices.length === 0) {
-                shuffledArray.push(array.pop());
-                break;
-            }
-
-            const randomIndex = validIndices[Math.floor(Math.random() * validIndices.length)];
-            const selectedItem = array[randomIndex];
-
-            shuffledArray.push(selectedItem);
-            lastSelectedItem = selectedItem;
-            array.splice(randomIndex, 1);
-        }
-
-        return shuffledArray;
+        return array.sort(() => Math.random() - 0.5);
     };
 
     const generateInitialBlockArrayAndSelectedIndex = () => {
-        const blockArray = shuffleArray(Array.from({ length: 5 }, (_, i) => [i + 1]));
+        const blockArray = shuffleArray(Array.from({ length: 20 }, (_, i) => [i + 1]));
         const selectedBlockIndex = 0;
         return joinAdjacentBlocks(blockArray, selectedBlockIndex);
     };
@@ -39,6 +25,16 @@ export default function useGameLogic() {
     function playMp3(audioSrc) {
         const audio = new Audio(audioSrc);
         audio.play();
+    }
+
+    function playClickSound() {
+        const audioSrc = [clickSound, clickSound2, clickSound3, clickSound4, clickSound5][Math.floor(Math.random() * 5)];
+        playMp3(audioSrc);
+    }
+
+    function playSelectionSound() {
+        const audioSrc = [selectionSound, selectionSound2, selectionSound3, selectionSound4][Math.floor(Math.random() * 4)];
+        playMp3(audioSrc);
     }
 
     function mergeAdjacentBlocks(arr) {
@@ -116,7 +112,7 @@ export default function useGameLogic() {
 
 
     const handleLeftArrow = (blockArray, selectedBlockIndex, isBlockSelected) => {
-        playMp3(clickSound);
+        playClickSound();
         if (isBlockSelected)
             return moveSelectedBlockLeft(blockArray, selectedBlockIndex);
         else
@@ -127,7 +123,7 @@ export default function useGameLogic() {
     }
 
     const handleRightArrow = (blockArray, selectedBlockIndex, isBlockSelected) => {
-        playMp3(clickSound);
+        playClickSound();
         if (isBlockSelected)
             return moveSelectedBlockRight(blockArray, selectedBlockIndex);
         else
@@ -138,7 +134,7 @@ export default function useGameLogic() {
     }
 
     const handleSelectionButton = (blockArray, selectedBlockIndex, selected) => {
-        playMp3(selectionSound);
+        playSelectionSound()
         if (selected)
             return { ...joinAdjacentBlocks(blockArray, selectedBlockIndex), selected: !selected };
         else
@@ -154,6 +150,11 @@ export default function useGameLogic() {
         return blockArray.length === 1;
     }
 
+    const handleGameFinished = () => {
+        console.log('Game finished');
+        playMp3(winSound);
+    }
+
 
 
     return {
@@ -164,6 +165,7 @@ export default function useGameLogic() {
         handleLeftArrow,
         handleRightArrow,
         handleSelectionButton,
-        isGameFinished
+        isGameFinished,
+        handleGameFinished
     };
 }

@@ -14,7 +14,7 @@ export default function Time({ started, paused }) {
                 } else
                     setElapsedTime((time) => time + 1);
 
-            }, 10);
+            }, 100);
             return () => clearInterval(interval);
         }, [started, paused]
     )
