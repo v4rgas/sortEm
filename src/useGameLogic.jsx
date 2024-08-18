@@ -7,7 +7,6 @@ export default function useGameLogic() {
         const blockArray = Array.from({ length: 20 }, (_, i) => [i + 1])
             .sort(() => Math.random() - 0.5);
         const selectedBlockIndex = 0;
-        // joinAdjacentBlocks(blockArray, selectedBlockIndex);
         return joinAdjacentBlocks(blockArray, selectedBlockIndex);
     };
 

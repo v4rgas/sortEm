@@ -1,6 +1,6 @@
 .number-block {
     font-weight: bold;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(235, 235, 235);
     color: #333;
     text-align: center;
     padding: 1rem;
@@ -9,13 +9,19 @@
     flex-direction: row;
     display: flex;
     width: fit-content;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 3rem;
+    transition: all 0.1s;
 }
 
 .hovered {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: rgb(250, 250, 250);
+    /* background-color: rgb(148, 148, 148); */
+
 }
 
 .selected {
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
