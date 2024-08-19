@@ -1,0 +1,28 @@
+table {
+    width: 100%;
+}
+
+tr {
+    text-align: center;
+}
+
+.player-0 {
+    background-color: #FFD700;
+    /* border: #FFD700 2px solid; */
+    font-size: xx-large;
+
+}
+
+.player-1 {
+    background-color: #C0C0C0;
+    font-size: x-large;
+}
+
+.player-2 {
+    background-color: #CD7F32;
+    font-size: large;
+}
+
+.player-regular {
+    font-size: small;
+}

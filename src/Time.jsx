@@ -46,7 +46,10 @@ export default function Time({ started, ended }) {
     }, [started, ended, startingTime]);
 
 
+    const redness = Math.min(255, Math.floor((elapsedTime / 1000) * 255 / 35));
 
 
-    return <h1>{(elapsedTime / 1000).toFixed(2)}</h1>;
+
+
+    return <h1 style={{ color: `rgb(${redness},0,0)` }}>{(elapsedTime / 1000).toFixed(2)}</h1>;
 }
