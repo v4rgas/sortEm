@@ -9,7 +9,7 @@ export default function LeaderboardTable({ dataToDisplay }) {
                 </tr>
             </thead>
             <tbody>
-                {dataToDisplay?.filter(({ time }) => time > 9394).map((obj, i) => {
+                {dataToDisplay?.filter(({ time }) => time > 2000).map((obj, i) => {
                     const tdClass = i < 3 ? `winner-td` : '';
                     return (
                         <tr key={i} className={i < 3 ? `player-${i}` : 'player-regular'} >
