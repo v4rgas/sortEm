@@ -16,7 +16,7 @@ export default function useApi() {
     const { encrypt } = useCrypto();
     async function postTime(username, time) {
         if (import.meta.env.DEV) {
-            console.log('Mock postTime:', { username, time });
+            console.log('Mock postTime:', { username, time, moves: 0 });
             return Promise.resolve({ status: 'success', message: 'Time posted (mock)' });
         }
         const x = await encrypt(JSON.stringify({ username, time, moves: 0 }));

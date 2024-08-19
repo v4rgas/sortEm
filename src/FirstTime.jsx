@@ -58,6 +58,7 @@ export default function FirstTime() {
 
 
                 }}
+                maxLength={25}
             />
         </>
     )
