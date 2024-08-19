@@ -1,0 +1,5 @@
+.usernames {
+    max-width: 400px;
+    overflow-wrap: anywhere;
+    text-align: center;
+}

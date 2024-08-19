@@ -1,3 +1,5 @@
+import './Leaderboard.css';
+
 import { BrowserView, MobileOnlyView } from "react-device-detect";
 import { useEffect, useState } from "react";
 
@@ -8,8 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 
 export default function Leaderboard() {
-    const { getLeaderboard } = useApi();
+    const { getLeaderboard, getAllUsernames } = useApi();
     const [leaderboard, setLeaderboard] = useState([]);
+    const [players, setUsernames] = useState([]);
 
     const navigate = useNavigate()
 
@@ -17,6 +20,10 @@ export default function Leaderboard() {
     useEffect(() => {
         getLeaderboard().then((data) => {
             setLeaderboard(data);
+            console.log(data);
+        });
+        getAllUsernames().then((data) => {
+            setUsernames(data);
             console.log(data);
         });
     }, []);
@@ -60,7 +67,13 @@ export default function Leaderboard() {
             <LeaderboardTable dataToDisplay={leaderboard} />
 
             <h2>Celebrating the Most Amazing Players!</h2>
-            {/* all usernames of people that have played */}
+            <div className="usernames">
+                {players.map(({ username }, i) => (
+                    username + " "
+                ))}
+            </div>
+
+
         </div >
     );
 }

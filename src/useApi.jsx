@@ -42,5 +42,13 @@ export default function useApi() {
         return data;
     }
 
-    return { postTime, getLeaderboard };
+    async function getAllUsernames() {
+        const response = await fetch('https://sortem.sacowea.cl/api/leaderboard/usernames', {
+            method: 'GET',
+        });
+        const data = await response.json();
+        return data;
+    }
+
+    return { postTime, getLeaderboard, getAllUsernames };
 }
