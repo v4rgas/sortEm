@@ -121,7 +121,7 @@ function App() {
         <span className='instructions' hidden={gameStarted}>
           Move left: swipe left; <br />
           Move right: swipe right; <br />
-          Select and drop: tap
+          Select and drop: tap <br />
           Restart: long swipe down
         </span>
       </MobileOnlyView>
