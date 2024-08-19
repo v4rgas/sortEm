@@ -6,20 +6,24 @@ tr {
     text-align: center;
 }
 
+.winner-td {
+    padding: 0.5rem;
+}
+
 .player-0 {
-    background-color: #FFD700;
+    color: #ffd900;
     /* border: #FFD700 2px solid; */
     font-size: xx-large;
 
 }
 
 .player-1 {
-    background-color: #C0C0C0;
+    color: #acacac;
     font-size: x-large;
 }
 
 .player-2 {
-    background-color: #CD7F32;
+    color: #CD7F32;
     font-size: large;
 }
 
