@@ -34,7 +34,9 @@ export default function Time({ started, ended }) {
         }
 
         const updateElapsedTime = () => {
-            setElapsedTime(Date.now() - startingTime);
+            if (startingTime !== null) {
+                setElapsedTime(Date.now() - startingTime);
+            }
         };
 
         const interval = setInterval(updateElapsedTime, 10);
