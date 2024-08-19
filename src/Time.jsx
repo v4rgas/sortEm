@@ -43,7 +43,7 @@ export default function Time({ started, ended }) {
 
 
         return () => clearInterval(interval);
-    }, [started, ended]);
+    }, [started, ended, startingTime]);
 
 
 
