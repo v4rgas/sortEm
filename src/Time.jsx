@@ -1,27 +1,33 @@
 import { useEffect, useState } from "react";
 
-export default function Time({ started, paused }) {
+import { useSetAtom } from "jotai";
+import { userTimesAtom } from "./atoms";
+
+export default function Time({ started, ended }) {
     const [elapsedTime, setElapsedTime] = useState(0);
-    useEffect(
-        () => {
-            const interval = setInterval(() => {
-                if (paused)
-                    return;
+    const setUserTimes = useSetAtom(userTimesAtom);
 
-                if (!started) {
-                    setElapsedTime(0);
-                    clearInterval(interval);
-                } else
-                    setElapsedTime((time) => time + 1);
+    useEffect(() => {
+        console.log(started, ended);
+        if (!started) {
+            setElapsedTime(0);
+            return;
+        }
 
-            }, 10);
-            return () => clearInterval(interval);
-        }, [started, paused]
-    )
-    return (
-        <>
-            <h1>{(elapsedTime / 100).toFixed(2)}</h1>
-        </>
+        if (ended) {
+            setUserTimes((times) => [...times, elapsedTime]);
+            return
+        }
 
-    )
+        const updateElapsedTime = () => {
+            setElapsedTime((time) => time + 1);
+        };
+
+        const interval = setInterval(updateElapsedTime, 10);
+
+
+        return () => clearInterval(interval);
+    }, [started, ended]);
+
+    return <h1>{(elapsedTime / 100).toFixed(2)}</h1>;
 }

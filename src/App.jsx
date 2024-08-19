@@ -24,6 +24,11 @@ function App() {
 
 
 
+  const onNewGame = () => {
+    setGameEnded(false);
+    setGameStarted(false);
+    updateGameState(generateInitialBlockArrayAndSelectedIndex());
+  }
 
   const updateGameState = ({ blockArray, focusedBlockIndex }) => {
     setBlockArray(blockArray);
@@ -56,12 +61,6 @@ function App() {
   }
 
 
-  // useKeyboard({
-  //   onKeyPressed: useCallback(() => {
-  //     setGameStarted(true);
-  //   }, [setGameStarted])
-  // });
-
   useKeyboard({
     key: ["ArrowRight", 'L', 'l'],
     preventRepeat: true,
@@ -83,20 +82,28 @@ function App() {
   useKeyboard({
     key: ["r", "R"],
     preventRepeat: true,
-    onKeyPressed: () => { window.location.reload() }
+    onKeyPressed: onNewGame
   });
 
-  const { ref } = useSwipeable({
+  const swipeHandlers = useSwipeable({
     onTouchStartOrOnMouseDown: () => setGameStarted(true),
     onSwipedLeft: onLeftArrow,
     onSwipedRight: onRightArrow,
     onTap: onSelectionButton,
   });
 
+  const longSwipeHandlers = useSwipeable({
+    onSwipedDown: onNewGame,
+    delta: 300
+  });
+
+
   useEffect(() => {
-    ref(document);
+    swipeHandlers.ref(document);
+    longSwipeHandlers.ref(document);
     return () => {
-      ref({});
+      swipeHandlers.ref({});
+      longSwipeHandlers.ref({});
     }
   })
 
@@ -115,6 +122,7 @@ function App() {
           Move left: swipe left; <br />
           Move right: swipe right; <br />
           Select and drop: tap
+          Restart: long swipe down
         </span>
       </MobileOnlyView>
 
@@ -127,7 +135,7 @@ function App() {
         </span>
       </BrowserView>
 
-      <Time started={gameStarted} paused={gameEnded}></Time>
+      <Time started={gameStarted} ended={gameEnded}></Time>
 
 
 

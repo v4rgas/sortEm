@@ -37,7 +37,7 @@ export default function useGameLogic() {
 
 
     const generateInitialBlockArrayAndSelectedIndex = () => {
-        const blockArray = shuffleArray(Array.from({ length: 20 }, (_, i) => [i + 1]));
+        const blockArray = shuffleArray(Array.from({ length: 5 }, (_, i) => [i + 1]));
         const focusedBlockIndex = 0;
         return joinAdjacentBlocks(blockArray, focusedBlockIndex);
     };
