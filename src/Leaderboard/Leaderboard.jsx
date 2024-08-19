@@ -55,7 +55,7 @@ export default function Leaderboard() {
                 <span>Press space to go back</span>
             </BrowserView>
 
-            <h1>Leaderboard</h1>
+            <h1>Top 100</h1>
 
             <LeaderboardTable dataToDisplay={leaderboard} />
         </div >
