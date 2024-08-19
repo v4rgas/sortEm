@@ -6,8 +6,9 @@ import useApi from "./useApi";
 
 export default function Time({ started, ended }) {
     const [elapsedTime, setElapsedTime] = useState(0);
+    const [startingTime, setStartingTime] = useState(null);
     const setUserTimes = useSetAtom(userTimesAtom);
-    const username = useAtomValue(usernameAtom)
+    const username = useAtomValue(usernameAtom);
     const { postTime } = useApi();
 
     useEffect(() => {
@@ -19,7 +20,12 @@ export default function Time({ started, ended }) {
 
         if (!started) {
             setElapsedTime(0);
+            setStartingTime(null);
             return;
+        }
+
+        if (started && !startingTime) {
+            setStartingTime(Date.now());
         }
 
         if (ended) {
@@ -28,7 +34,7 @@ export default function Time({ started, ended }) {
         }
 
         const updateElapsedTime = () => {
-            setElapsedTime((time) => time + 1);
+            setElapsedTime(Date.now() - startingTime);
         };
 
         const interval = setInterval(updateElapsedTime, 10);
@@ -40,5 +46,5 @@ export default function Time({ started, ended }) {
 
 
 
-    return <h1>{(elapsedTime / 100).toFixed(2)}</h1>;
+    return <h1>{(elapsedTime / 1000).toFixed(2)}</h1>;
 }
