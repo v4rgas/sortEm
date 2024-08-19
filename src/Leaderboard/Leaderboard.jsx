@@ -32,7 +32,8 @@ export default function Leaderboard() {
     const { ref } = useSwipeable({
         onSwipedUp: () => {
             navigate("/");
-        }
+        },
+        delta: 300,
     });
 
     useEffect(() => {
