@@ -35,6 +35,8 @@ export default function FirstTime() {
         }
     })
 
+    const validUsernameRegex = /^[a-zA-Z0-9]+$/;
+
     return (
         <>
             <MobileOnlyView>
@@ -48,7 +50,14 @@ export default function FirstTime() {
                 type="text"
                 className="username-input"
                 placeholder="Enter your username"
-                onChange={(e) => setUserInput(e.target.value)}
+                value={userInput}
+                onChange={(e) => {
+                    if (validUsernameRegex.test(e.target.value) || e.target.value === "") {
+                        setUserInput(e.target.value)
+                    }
+
+
+                }}
             />
         </>
     )
