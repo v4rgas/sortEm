@@ -58,6 +58,9 @@ export default function Leaderboard() {
             <h1>Top 100</h1>
 
             <LeaderboardTable dataToDisplay={leaderboard} />
+
+            <h2>Celebrating the Most Amazing Players!</h2>
+            {/* all usernames of people that have played */}
         </div >
     );
 }

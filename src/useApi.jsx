@@ -25,7 +25,7 @@ export default function useApi() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, time, moves: 0, x }),
+            body: JSON.stringify({ username, time, moves: 9999, x }),
         });
     }
 
