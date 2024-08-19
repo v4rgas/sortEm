@@ -1,14 +1,22 @@
+import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
+import { userTimesAtom, usernameAtom } from "./atoms";
 
-import { useSetAtom } from "jotai";
-import { userTimesAtom } from "./atoms";
+import useApi from "./useApi";
 
 export default function Time({ started, ended }) {
     const [elapsedTime, setElapsedTime] = useState(0);
     const setUserTimes = useSetAtom(userTimesAtom);
+    const username = useAtomValue(usernameAtom)
+    const { postTime } = useApi();
 
     useEffect(() => {
         console.log(started, ended);
+
+        if (started && ended) {
+            postTime(username, elapsedTime)
+        }
+
         if (!started) {
             setElapsedTime(0);
             return;
@@ -28,6 +36,9 @@ export default function Time({ started, ended }) {
 
         return () => clearInterval(interval);
     }, [started, ended]);
+
+
+
 
     return <h1>{(elapsedTime / 100).toFixed(2)}</h1>;
 }

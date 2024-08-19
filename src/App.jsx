@@ -7,6 +7,7 @@ import NumberBlock from './BaseGame/NumberBlock'
 import Time from './Time';
 import useGameLogic from './BaseGame/useGameLogic';
 import { useKeyboard } from './BaseGame/useKeyboard';
+import { useNavigate } from 'react-router-dom';
 import useState from 'react-usestateref';
 import { useSwipeable } from 'react-swipeable';
 
@@ -19,10 +20,14 @@ function App() {
   const [selected, setSelected, selectedRef] = useState(false);
   const [gameStarted, setGameStarted, gameStartedRef] = useState(false);
   const [gameEnded, setGameEnded, gameEndedRef] = useState(false);
+  const navigate = useNavigate();
 
 
 
 
+  const goToLeaderboard = () => {
+    navigate('/l');
+  }
 
   const onNewGame = () => {
     setGameEnded(false);
@@ -85,6 +90,12 @@ function App() {
     onKeyPressed: onNewGame
   });
 
+  useKeyboard({
+    key: " ",
+    preventRepeat: true,
+    onKeyPressed: goToLeaderboard
+  });
+
   const swipeHandlers = useSwipeable({
     onTouchStartOrOnMouseDown: () => setGameStarted(true),
     onSwipedLeft: onLeftArrow,
@@ -94,6 +105,7 @@ function App() {
 
   const longSwipeHandlers = useSwipeable({
     onSwipedDown: onNewGame,
+    onSwipedUp: goToLeaderboard,
     delta: 300
   });
 
@@ -122,7 +134,8 @@ function App() {
           Move left: swipe left; <br />
           Move right: swipe right; <br />
           Select and drop: tap <br />
-          Restart: long swipe down
+          Restart: long swipe down <br />
+          Leaderboard: long swipe up
         </span>
       </MobileOnlyView>
 
@@ -131,7 +144,8 @@ function App() {
           Move left: ← or H <br />
           Move right: → or L<br />
           Select and drop: S <br />
-          Restart: R
+          Restart: R <br />
+          Leaderboard: Space
         </span>
       </BrowserView>
 
