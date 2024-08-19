@@ -35,6 +35,14 @@ export default function Leaderboard() {
         }
     });
 
+    useEffect(() => {
+        ref(document);
+        return () => {
+            ref({});
+        }
+    }
+    )
+
 
 
     return (
