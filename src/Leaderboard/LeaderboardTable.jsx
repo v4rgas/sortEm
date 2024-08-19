@@ -12,7 +12,7 @@ export default function LeaderboardTable({ dataToDisplay }) {
                     return (
                         <tr key={i}>
                             <td>{obj.username}</td>
-                            <td>{(obj.time / 100).toFixed(2)}</td>
+                            <td>{(obj.time / 1000).toFixed(3)}</td>
                         </tr>
                     );
                 })}
