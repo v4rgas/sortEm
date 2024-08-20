@@ -1,5 +1,9 @@
 import './App.css'
 
+import moonDark from './assets/moon-black.svg';
+import moonLight from './assets/moon-white.svg';
+import sun from './assets/sun.svg';
+
 import { BrowserView, MobileOnlyView } from 'react-device-detect';
 import { useCallback, useEffect } from 'react';
 
@@ -187,7 +191,10 @@ function App() {
       <Time started={gameStarted} ended={gameEnded}></Time>
 
       {/* <p className='dark-mode-toggle' onClick={toggleDarkMode}>Dark Mode</p> */}
-      <input className='dark-mode-toggle' type='checkbox' onChange={toggleDarkMode} checked={themeStorage === 'dark'}></input>
+      <label className='dark-mode-toggle'>
+        <img className='dark-mode-moon' src={themeStorage === 'dark' ? moonLight : sun} />
+        <input className='hidden-checkbox' type='checkbox' onChange={toggleDarkMode} checked={themeStorage === 'dark'}></input>
+      </label>
 
       <div className='flex'>
         {blockArray.map((numbers, index) => (
