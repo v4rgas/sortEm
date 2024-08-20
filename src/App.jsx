@@ -1,13 +1,12 @@
 import './App.css'
 
 import { BrowserView, MobileOnlyView } from 'react-device-detect';
-import { useAtom, useAtomValue } from 'jotai';
 
-import DarkModeButton from './DarkModeButton';
 import NumberBlock from './BaseGame/NumberBlock'
 import Time from './Time';
 import { themeAtom } from './atoms';
 import useApi from './useApi';
+import { useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 import useGameLogic from './BaseGame/useGameLogic';
 import { useKeyboard } from './BaseGame/useKeyboard';
@@ -130,7 +129,6 @@ function App() {
   useEffect(() => {
     const { blockArray, focusedBlockIndex } = generateInitialBlockArrayAndSelectedIndex();
     getNumberOfOnlinePlayers().then((data) => {
-      console.log(data);
       setOnlinePlayerCount(data.activeUsers);
     })
 
@@ -163,8 +161,6 @@ function App() {
       </BrowserView>
 
       <Time started={gameStarted} ended={gameEnded}></Time>
-
-      {!(gameStarted && !gameEnded) && <DarkModeButton hidden />}
 
       <div className='flex'>
         {blockArray.map((numbers, index) => (

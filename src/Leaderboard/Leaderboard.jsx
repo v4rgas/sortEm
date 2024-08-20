@@ -16,21 +16,19 @@ export default function Leaderboard() {
     const [worstPlayers, setWorstPlayers] = useState([]);
     const [players, setUsernames] = useState([]);
 
+
     const navigate = useNavigate()
 
 
     useEffect(() => {
         getLeaderboard().then((data) => {
             setLeaderboard(data);
-            console.log(data);
         });
         getAllUsernames().then((data) => {
             setUsernames(data);
-            console.log(data);
         });
         getWorstPlayers().then((data) => {
             setWorstPlayers(data);
-            console.log(data);
         });
     }, []);
 

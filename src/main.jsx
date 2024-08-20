@@ -1,12 +1,13 @@
 import './index.css'
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { StrictMode, useEffect } from 'react'
 
 import App from './App.jsx'
 import Home from './Home.jsx'
 import Leaderboard from './Leaderboard/Leaderboard.jsx'
 import Multiplayer from './Multiplayer.jsx'
-import { StrictMode } from 'react'
+import Theme from './Theme.jsx'
 import { createRoot } from 'react-dom/client'
 
 const router = createBrowserRouter(
@@ -32,6 +33,9 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Theme>
+      <RouterProvider router={router} />
+    </Theme>
+
   </StrictMode>,
 )
