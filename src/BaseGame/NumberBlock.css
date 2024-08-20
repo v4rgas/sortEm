@@ -14,15 +14,13 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 3rem;
-    transition: all 0.1s;
     flex-grow: 1;
 }
 
 .hovered {
+
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     background-color: var(--number-block-color-hovered);
-    /* background-color: rgb(148, 148, 148); */
-
 }
 
 .selected {
