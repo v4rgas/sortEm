@@ -172,7 +172,7 @@ function App() {
         ))}
       </div>
 
-      <footer>
+      <footer key={gameStarted} hidden={gameStarted && !gameEnded}>
         online players: {onlinePlayerCount}<br /> <br />
         made by a <a href="https://github.com/v4rgas" target='_blank'>communist drug fueled atheist </a>
         with a little help from a <a href="https://github.com/BrunoFarfan" target='_blank'>profit-driven crypto-bro</a>
