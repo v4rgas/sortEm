@@ -1,6 +1,6 @@
+import { themeAtom, userTimesAtom, usernameAtom } from "./atoms";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { themeAtom, userTimesAtom, usernameAtom } from "./atoms";
 
 import useApi from "./useApi";
 
@@ -11,8 +11,19 @@ export default function Time({ started, ended }) {
     const username = useAtomValue(usernameAtom);
     const theme = useAtomValue(themeAtom);
     const { postTime } = useApi();
+    const { getBestTime } = useApi();
 
     // let theme = document.body.getAttribute('data-theme');
+
+    const [bestTime, setBestTime] = useState(35);
+
+    useEffect(() => {
+        getBestTime().then((data) => {
+            setBestTime(data.time / 1000);
+            console.log(data)
+        });
+    }, []);
+
 
 
     useEffect(() => {
@@ -20,6 +31,12 @@ export default function Time({ started, ended }) {
 
         if (started && ended) {
             postTime(username, elapsedTime)
+            getBestTime(10).then((data) => {
+                if (data.time > elapsedTime) {
+                    alert('You are in the top 10!!!, your time will be manually reviewed and added to the leaderboard');
+                }
+
+            });
         }
 
         if (!started) {
@@ -50,7 +67,7 @@ export default function Time({ started, ended }) {
     }, [started, ended, startingTime]);
 
 
-    const redness = Math.min(255, Math.floor((elapsedTime / 1000) * 255 / 35));
+    const redness = Math.min(255, Math.floor((elapsedTime / 1000) * 255 / bestTime));
 
     let rgb;
     if (theme == 'light') {
