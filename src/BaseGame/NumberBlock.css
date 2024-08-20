@@ -1,6 +1,9 @@
+@import url(../var.css);
+
 .number-block {
     font-weight: bold;
-    background-color: rgb(235, 235, 235);
+    background-color: var(--number-block-color);
+    color: var(--text-primary);
     text-align: center;
     padding: 1rem;
     border-radius: 0.5rem;
@@ -17,12 +20,12 @@
 
 .hovered {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color: rgb(250, 250, 250);
+    background-color: var(--number-block-color-hovered);
     /* background-color: rgb(148, 148, 148); */
 
 }
 
 .selected {
-    background-color: rgb(215, 215, 215);
+    background-color: var(--number-block-color-hovered);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
 }
