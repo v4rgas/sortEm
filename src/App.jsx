@@ -1,22 +1,19 @@
 import './App.css'
 
-import moonLight from './assets/moon-white.svg';
-import sun from './assets/sun.svg';
-
 import { BrowserView, MobileOnlyView } from 'react-device-detect';
-import { useCallback, useEffect } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
 
+import DarkModeButton from './DarkModeButton';
 import NumberBlock from './BaseGame/NumberBlock'
 import Time from './Time';
+import { themeAtom } from './atoms';
 import useApi from './useApi';
+import { useEffect } from 'react';
 import useGameLogic from './BaseGame/useGameLogic';
 import { useKeyboard } from './BaseGame/useKeyboard';
 import { useNavigate } from 'react-router-dom';
 import useState from 'react-usestateref';
 import { useSwipeable } from 'react-swipeable';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { themeAtom } from './atoms';
-
 
 function App() {
   const { getNumberOfOnlinePlayers } = useApi()
@@ -28,33 +25,11 @@ function App() {
   const [gameStarted, setGameStarted, gameStartedRef] = useState(false);
   const [gameEnded, setGameEnded, gameEndedRef] = useState(false);
   const [onlinePlayerCount, setOnlinePlayerCount] = useState(1);
-
-  const themeStorage = useAtomValue(themeAtom);
-  const setThemeStorage = useSetAtom(themeAtom);
-  // const [theme, setTheme] = useState(themeStorage);
-  
-
-  // console.log('theme:', theme, 'themeStorage:', themeStorage);
+  const themeStorage = useAtomValue(themeAtom)
 
 
 
   const navigate = useNavigate();
-
-
-
-  // console.log('themeStorage', themeStorage);
-
-  const toggleDarkMode = (e) => {
-    // setTheme(e.target.checked ? 'dark' : 'light');
-    setThemeStorage(e.target.checked ? 'dark' : 'light');
-    // console.log('theme:', theme, 'checked', e.target.checked)
-    // document.body.classList.toggle('dark-mode');
-  }
-
-  useEffect(() => {
-    document.body.setAttribute('data-theme', themeStorage);
-    // console.log('Setted theme', theme);
-  }, [themeStorage]);
 
   const goToLeaderboard = () => {
     navigate('/l');
@@ -189,11 +164,7 @@ function App() {
 
       <Time started={gameStarted} ended={gameEnded}></Time>
 
-      {/* <p className='dark-mode-toggle' onClick={toggleDarkMode}>Dark Mode</p> */}
-      <label className='dark-mode-toggle'>
-        <img className='dark-mode-moon' src={themeStorage === 'dark' ? moonLight : sun} />
-        <input className='hidden-checkbox' type='checkbox' onChange={toggleDarkMode} checked={themeStorage === 'dark'}></input>
-      </label>
+      <DarkModeButton />
 
       <div className='flex'>
         {blockArray.map((numbers, index) => (
