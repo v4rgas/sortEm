@@ -35,6 +35,8 @@ function App() {
   const onNewGame = () => {
     setGameEnded(false);
     setGameStarted(false);
+    setfocusedBlockIndex(0);
+    setSelected(false);
     updateGameState(generateInitialBlockArrayAndSelectedIndex());
   }
 
