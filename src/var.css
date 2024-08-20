@@ -4,6 +4,9 @@
   --number-block-color: rgb(235, 235, 235);
   --number-block-color-hovered: rgb(250, 250, 250);
   --number-block-color-selected: rgb(215, 215, 215);
+  --hyperlink-text-color: blue;
+  --hyperlink-text-color-visited: purple;
+  --hyperlink-text-color-active: red;
 }
 
 [data-theme='dark'] {
@@ -12,4 +15,7 @@
   --number-block-color: rgb(20, 20, 20);
   --number-block-color-hovered: rgb(5, 5, 5);
   --number-block-color-selected: rgb(40, 40, 40);
+  --hyperlink-text-color: rgb(117, 117, 255);
+  --hyperlink-text-color-visited: rgb(255, 171, 255);
+  --hyperlink-text-color-active: rgb(255, 124, 124);
 }

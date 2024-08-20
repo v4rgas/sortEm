@@ -46,3 +46,17 @@ footer {
   width: 0;
   position: absolute;
 }
+
+a:link {
+  color: var(--hyperlink-text-color);
+}
+
+a:visited {
+  color: var(--hyperlink-text-color-visited);
+
+}
+
+a:active {
+  color: var(--hyperlink-text-color-active);
+
+}
