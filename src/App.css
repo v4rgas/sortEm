@@ -7,7 +7,7 @@
   text-align: center;
 }
 
-body{
+body {
   background-color: var(--background);
   color: var(--text-primary)
 }
