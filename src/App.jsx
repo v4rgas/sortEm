@@ -164,7 +164,7 @@ function App() {
 
       <Time started={gameStarted} ended={gameEnded}></Time>
 
-      <DarkModeButton />
+      {!(gameStarted && !gameEnded) && <DarkModeButton hidden />}
 
       <div className='flex'>
         {blockArray.map((numbers, index) => (
