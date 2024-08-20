@@ -210,6 +210,7 @@ function App() {
         online players: {onlinePlayerCount}<br /> <br />
         made by a <a href="https://github.com/v4rgas" target='_blank'>communist drug fueled atheist </a>
         with a little help from a <a href="https://github.com/BrunoFarfan" target='_blank'>profit-driven crypto-bro</a>
+        {themeStorage === 'dark' && <div>and dark mode made by an <a href="https://github.com/ElTioAndresCabezas">adhd intern computer nerd</a></div>}
       </footer>
     </>
 
