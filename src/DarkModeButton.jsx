@@ -15,10 +15,10 @@ export default function DarkModeButton() {
     }, [themeStorage]);
 
 
-    return (
-        <label className='dark-mode-toggle'>
-            <img className='dark-mode-moon' src={themeStorage === 'dark' ? moonLight : sun} />
-            <input className='hidden-checkbox' type='checkbox' onChange={toggleDarkMode} checked={themeStorage === 'dark'}></input>
-        </label>
-    );
+    // return (
+    //     // <label className='dark-mode-toggle'>
+    //     //     <img className='dark-mode-moon' src={themeStorage === 'dark' ? moonLight : sun} />
+    //     //     <input className='hidden-checkbox' type='checkbox' onChange={toggleDarkMode} checked={themeStorage === 'dark'}></input>
+    //     // </label>
+    // );
 }
