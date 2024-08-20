@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { userTimesAtom, usernameAtom } from "./atoms";
+import { themeAtom, userTimesAtom, usernameAtom } from "./atoms";
 
 import useApi from "./useApi";
 
@@ -9,9 +9,10 @@ export default function Time({ started, ended }) {
     const [startingTime, setStartingTime] = useState(null);
     const setUserTimes = useSetAtom(userTimesAtom);
     const username = useAtomValue(usernameAtom);
+    const theme = useAtomValue(themeAtom);
     const { postTime } = useApi();
 
-    let theme = document.body.getAttribute('data-theme');
+    // let theme = document.body.getAttribute('data-theme');
 
 
     useEffect(() => {
