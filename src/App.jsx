@@ -12,8 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import useState from 'react-usestateref';
 import { useSwipeable } from 'react-swipeable';
 
-function App() {
 
+function App() {
   const { getNumberOfOnlinePlayers } = useApi()
   const { generateInitialBlockArrayAndSelectedIndex, handleLeftArrow, handleRightArrow, handleSelectionButton, isGameFinished, handleGameFinished } = useGameLogic();
 
@@ -23,10 +23,16 @@ function App() {
   const [gameStarted, setGameStarted, gameStartedRef] = useState(false);
   const [gameEnded, setGameEnded, gameEndedRef] = useState(false);
   const [onlinePlayerCount, setOnlinePlayerCount] = useState(1);
+
+  const [theme, setTheme] = useState('light');
   const navigate = useNavigate();
 
 
-
+  const toggleDarkMode = (e) => {
+    setTheme(e.target.checked ? 'dark' : 'light');
+    // console.log('theme:', theme, 'checked', e.target.checked)
+    // document.body.classList.toggle('dark-mode');
+  }
 
   const goToLeaderboard = () => {
     navigate('/l');
@@ -134,6 +140,10 @@ function App() {
     updateGameState({ blockArray, focusedBlockIndex });
   }, [])
 
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+    console.log('Setted theme', theme);
+  }, [theme])
 
 
 
@@ -161,7 +171,8 @@ function App() {
 
       <Time started={gameStarted} ended={gameEnded}></Time>
 
-
+      {/* <p className='dark-mode-toggle' onClick={toggleDarkMode}>Dark Mode</p> */}
+      <input className='dark-mode-toggle' type='checkbox' onChange={toggleDarkMode} checked={theme === 'dark'}></input>
 
       <div className='flex'>
         {blockArray.map((numbers, index) => (

@@ -1,8 +1,15 @@
+@import url('./var.css');
+
 #root {
   /* max-width: 1280px; */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+body{
+  background-color: var(--background);
+  color: var(--text-primary)
 }
 
 .flex {
@@ -19,4 +26,10 @@
 footer {
   margin-top: 2rem;
   font-size: 0.8rem;
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  top: 0;
+  right: 0;
 }
