@@ -26,6 +26,6 @@
 }
 
 .selected {
-    background-color: var(--number-block-color-hovered);
+    background-color: var(--number-block-color-selected);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
 }

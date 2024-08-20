@@ -13,8 +13,8 @@
   --background: #303030;
   --text-primary: #ffffff;
   --number-block-color: rgb(20, 20, 20);
-  --number-block-color-hovered: rgb(5, 5, 5);
-  --number-block-color-selected: rgb(40, 40, 40);
+  --number-block-color-hovered: rgb(66, 66, 66);
+  --number-block-color-selected: rgb(107, 107, 107);
   --hyperlink-text-color: rgb(117, 117, 255);
   --hyperlink-text-color-visited: rgb(255, 171, 255);
   --hyperlink-text-color-active: rgb(255, 124, 124);
