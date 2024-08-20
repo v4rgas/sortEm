@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+}
+
+tr {
+    text-align: center;
+}
+
+.loser-td {
+    padding: 0.5rem;
+}
+
+.player-0-worst {
+    color: rgb(219, 25, 25);
+    /* border: #FFD700 2px solid; */
+    font-size: xx-large;
+}
+
+.player-1-worst {
+    color: rgb(228, 108, 28);
+    font-size: x-large;
+}
+
+.player-2-worst {
+    color: #c9bf30;
+    font-size: large;
+}
+
+.player-regular {
+    font-size: small;
+}
