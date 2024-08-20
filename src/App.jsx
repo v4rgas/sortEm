@@ -11,6 +11,8 @@ import { useKeyboard } from './BaseGame/useKeyboard';
 import { useNavigate } from 'react-router-dom';
 import useState from 'react-usestateref';
 import { useSwipeable } from 'react-swipeable';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { themeAtom } from './atoms';
 
 
 function App() {
@@ -24,15 +26,32 @@ function App() {
   const [gameEnded, setGameEnded, gameEndedRef] = useState(false);
   const [onlinePlayerCount, setOnlinePlayerCount] = useState(1);
 
-  const [theme, setTheme] = useState('light');
+  const themeStorage = useAtomValue(themeAtom);
+  const setThemeStorage = useSetAtom(themeAtom);
+  // const [theme, setTheme] = useState(themeStorage);
+  
+
+  // console.log('theme:', theme, 'themeStorage:', themeStorage);
+
+
+
   const navigate = useNavigate();
 
 
+
+  // console.log('themeStorage', themeStorage);
+
   const toggleDarkMode = (e) => {
-    setTheme(e.target.checked ? 'dark' : 'light');
+    // setTheme(e.target.checked ? 'dark' : 'light');
+    setThemeStorage(e.target.checked ? 'dark' : 'light');
     // console.log('theme:', theme, 'checked', e.target.checked)
     // document.body.classList.toggle('dark-mode');
   }
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', themeStorage);
+    // console.log('Setted theme', theme);
+  }, [themeStorage]);
 
   const goToLeaderboard = () => {
     navigate('/l');
@@ -140,10 +159,6 @@ function App() {
     updateGameState({ blockArray, focusedBlockIndex });
   }, [])
 
-  useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
-    console.log('Setted theme', theme);
-  }, [theme])
 
 
 
@@ -172,7 +187,7 @@ function App() {
       <Time started={gameStarted} ended={gameEnded}></Time>
 
       {/* <p className='dark-mode-toggle' onClick={toggleDarkMode}>Dark Mode</p> */}
-      <input className='dark-mode-toggle' type='checkbox' onChange={toggleDarkMode} checked={theme === 'dark'}></input>
+      <input className='dark-mode-toggle' type='checkbox' onChange={toggleDarkMode} checked={themeStorage === 'dark'}></input>
 
       <div className='flex'>
         {blockArray.map((numbers, index) => (
