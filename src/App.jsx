@@ -74,19 +74,19 @@ function App() {
 
 
   useKeyboard({
-    key: ["ArrowRight", 'L', 'l'],
+    key: ["ArrowRight", 'L', 'l', 'D', 'd'],
     preventRepeat: true,
     onKeyPressed: onRightArrow
   });
 
   useKeyboard({
-    key: ["ArrowLeft", 'H', 'h'],
+    key: ["ArrowLeft", 'H', 'h', 'A', 'a'],
     preventRepeat: true,
     onKeyPressed: onLeftArrow
   });
 
   useKeyboard({
-    key: ["s", "S"],
+    key: ["s", "S", "j", "J"],
     preventRepeat: true,
     onKeyPressed: onSelectionButton
   });
@@ -152,9 +152,9 @@ function App() {
 
       <BrowserView>
         <span className='instructions' hidden={gameStarted && !gameEnded}>
-          Move left: ← or H <br />
-          Move right: → or L<br />
-          Select and drop: S <br />
+          Move left: ← or H or A <br />
+          Move right: → or L or D<br />
+          Select and drop: S or J <br />
           Restart: R <br />
           Leaderboard: Space
         </span>
