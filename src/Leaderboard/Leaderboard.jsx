@@ -58,7 +58,8 @@ export default function Leaderboard() {
 
 
     return (
-        <div>
+
+        <div className='center'>
             <MobileOnlyView>
                 <span>Long swipe up to go back</span>
             </MobileOnlyView>

@@ -6,6 +6,10 @@ tr {
     text-align: center;
 }
 
+td {
+    width: 50%;
+}
+
 .winner-td {
     padding: 0.5rem;
 }

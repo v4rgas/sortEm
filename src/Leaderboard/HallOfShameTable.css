@@ -1,11 +1,3 @@
-table {
-    width: 100%;
-}
-
-tr {
-    text-align: center;
-}
-
 .loser-td {
     padding: 0.5rem;
 }
@@ -24,8 +16,4 @@ tr {
 .player-2-worst {
     color: #c9bf30;
     font-size: large;
-}
-
-.player-regular {
-    font-size: small;
 }
