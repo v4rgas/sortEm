@@ -1,6 +1,5 @@
 import './App.css'
 
-import moonDark from './assets/moon-black.svg';
 import moonLight from './assets/moon-white.svg';
 import sun from './assets/sun.svg';
 
