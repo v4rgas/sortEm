@@ -5,6 +5,7 @@ import { useCallback, useEffect } from 'react';
 
 import NumberBlock from './BaseGame/NumberBlock'
 import Time from './Time';
+import useApi from './useApi';
 import useGameLogic from './BaseGame/useGameLogic';
 import { useKeyboard } from './BaseGame/useKeyboard';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +14,7 @@ import { useSwipeable } from 'react-swipeable';
 
 function App() {
 
+  const { getNumberOfOnlinePlayers } = useApi()
   const { generateInitialBlockArrayAndSelectedIndex, handleLeftArrow, handleRightArrow, handleSelectionButton, isGameFinished, handleGameFinished } = useGameLogic();
 
   const [blockArray, setBlockArray, blockArrayRef] = useState([]);
@@ -20,6 +22,7 @@ function App() {
   const [selected, setSelected, selectedRef] = useState(false);
   const [gameStarted, setGameStarted, gameStartedRef] = useState(false);
   const [gameEnded, setGameEnded, gameEndedRef] = useState(false);
+  const [onlinePlayerCount, setOnlinePlayerCount] = useState(1);
   const navigate = useNavigate();
 
 
@@ -121,6 +124,11 @@ function App() {
 
   useEffect(() => {
     const { blockArray, focusedBlockIndex } = generateInitialBlockArrayAndSelectedIndex();
+    getNumberOfOnlinePlayers().then((data) => {
+      console.log(data);
+      setOnlinePlayerCount(data.activeUsers);
+    })
+
     updateGameState({ blockArray, focusedBlockIndex });
   }, [])
 
@@ -163,7 +171,14 @@ function App() {
           </NumberBlock>
         ))}
       </div>
+
+      <footer>
+        online players: {onlinePlayerCount}<br />
+        made by <a href="https://github.com/v4rgas">a communist drug fueled atheist</a>
+      </footer>
     </>
+
+
   )
 }
 
