@@ -15,8 +15,9 @@ import useState from 'react-usestateref';
 import { useSwipeable } from 'react-swipeable';
 
 function App() {
-  const { getNumberOfOnlinePlayers } = useApi()
-  const { generateInitialBlockArrayAndSelectedIndex, handleLeftArrow, handleRightArrow, handleSelectionButton, isGameFinished, handleGameFinished } = useGameLogic();
+  const { getNumberOfOnlinePlayers, getTotalGamesPlayed } = useApi()
+  const { generateInitialBlockArrayAndSelectedIndex,
+    handleLeftArrow, handleRightArrow, handleSelectionButton, isGameFinished, handleGameFinished } = useGameLogic();
 
   const [blockArray, setBlockArray, blockArrayRef] = useState([]);
   const [focusedBlockIndex, setfocusedBlockIndex, focusedBlockIndexRef] = useState(0);
@@ -25,6 +26,7 @@ function App() {
   const [gameEnded, setGameEnded, gameEndedRef] = useState(false);
   const [onlinePlayerCount, setOnlinePlayerCount] = useState(1);
   const themeStorage = useAtomValue(themeAtom)
+  const [totalGamesPlayed, setTotalGamesPlayed] = useState(2234);
 
 
 
@@ -132,6 +134,12 @@ function App() {
       setOnlinePlayerCount(data.activeUsers);
     })
 
+    getTotalGamesPlayed().then((data) => {
+      setTotalGamesPlayed(data.total);
+    })
+
+
+
     updateGameState({ blockArray, focusedBlockIndex });
   }, [])
 
@@ -174,7 +182,8 @@ function App() {
       </div>
 
       <footer key={gameStarted} hidden={gameStarted && !gameEnded}>
-        online players: {onlinePlayerCount}<br /> <br />
+        online players: {onlinePlayerCount}<br />
+        total games played: {totalGamesPlayed} {"♥"} <br />
         made by a <a href="https://github.com/v4rgas" target='_blank'>communist drug fueled atheist </a>
         with a little help from a <a href="https://github.com/BrunoFarfan" target='_blank'>profit-driven crypto-bro</a>
         {themeStorage === 'dark' && <div>and dark mode made by an <a href="https://github.com/ElTioAndresCabezas">adhd intern computer nerd</a></div>}
