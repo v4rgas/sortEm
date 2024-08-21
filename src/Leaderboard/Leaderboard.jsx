@@ -81,6 +81,8 @@ export default function Leaderboard() {
                 ))}
             </div>
 
+            <h3>Thank you for playing {"<3"}, <a href='https://github.com/v4rgas' target='_blank'>juan</a></h3>
+
 
         </div >
     );
