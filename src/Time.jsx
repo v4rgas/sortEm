@@ -31,7 +31,7 @@ export default function Time({ started, ended }) {
 
         if (started && ended) {
             postTime(username, elapsedTime)
-            getBestTime(10).then((data) => {
+            getBestTime(50).then((data) => {
                 if (data.time > elapsedTime) {
                     alert('Your time was AMAZING, it will be manually reviewed and added to the leaderboard');
                 }
