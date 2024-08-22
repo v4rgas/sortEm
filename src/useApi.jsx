@@ -83,5 +83,13 @@ export default function useApi() {
         return data
     }
 
-    return { postTime, getLeaderboard, getAllUsernames, getNumberOfOnlinePlayers, getWorstPlayers, getBestTime, getTotalGamesPlayed };
+    async function getTodaysTop10() {
+        const response = await fetch('https://sortem.sacowea.cl/api/leaderboard/today', {
+            method: 'GET',
+        });
+        const data = await response.json();
+        return data
+    }
+
+    return { getTodaysTop10, postTime, getLeaderboard, getAllUsernames, getNumberOfOnlinePlayers, getWorstPlayers, getBestTime, getTotalGamesPlayed };
 }
