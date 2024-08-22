@@ -44,6 +44,22 @@ export default function Leaderboard() {
         }
     });
 
+    useKeyboard({
+        key: ["J", "j", 'ArrowDown'],
+        preventRepeat: false,
+        onKeyPressed: () => {
+            window.scrollBy({ top: 200, behavior: 'smooth' });
+        }
+    });
+
+    useKeyboard({
+        key: ["K", "k", 'ArrowUp'],
+        preventRepeat: false,
+        onKeyPressed: () => {
+            window.scrollBy({ top: -200, behavior: 'smooth' });
+        }
+    });
+
     const { ref } = useSwipeable({
         onSwipedUp: () => {
             navigate("/");
@@ -68,7 +84,8 @@ export default function Leaderboard() {
                 <span>Long swipe up to go back</span>
             </MobileOnlyView>
             <BrowserView>
-                <span>Press space to go back</span>
+                <span>Press space to go back <br />
+                    Scroll: J,K or ↑,↓</span>
             </BrowserView>
 
             <h1>Top 50</h1>
