@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 
 export default function Leaderboard() {
-    const { getLeaderboard, getAllUsernames, getWorstPlayers } = useApi();
+    const { getLeaderboard, getAllUsernames, getWorstPlayers, getTodaysTop10 } = useApi();
     const [leaderboard, setLeaderboard] = useState([]);
     const [worstPlayers, setWorstPlayers] = useState([]);
     const [players, setUsernames] = useState([]);
+    const [todaysTop10, setTodaysTop10] = useState([])
 
 
     const navigate = useNavigate()
@@ -30,6 +31,9 @@ export default function Leaderboard() {
         getWorstPlayers().then((data) => {
             setWorstPlayers(data);
         });
+        getTodaysTop10().then((data) => {
+            setTodaysTop10(data);
+        })
     }, []);
 
     useKeyboard({
@@ -37,6 +41,22 @@ export default function Leaderboard() {
         preventRepeat: true,
         onKeyPressed: () => {
             navigate("/");
+        }
+    });
+
+    useKeyboard({
+        key: ["J", "j", 'ArrowDown'],
+        preventRepeat: false,
+        onKeyPressed: () => {
+            window.scrollBy({ top: 200, behavior: 'smooth' });
+        }
+    });
+
+    useKeyboard({
+        key: ["K", "k", 'ArrowUp'],
+        preventRepeat: false,
+        onKeyPressed: () => {
+            window.scrollBy({ top: -200, behavior: 'smooth' });
         }
     });
 
@@ -64,12 +84,16 @@ export default function Leaderboard() {
                 <span>Long swipe up to go back</span>
             </MobileOnlyView>
             <BrowserView>
-                <span>Press space to go back</span>
+                <span>Press space to go back <br />
+                    Scroll: J,K or ↑,↓</span>
             </BrowserView>
 
             <h1>Top 50</h1>
 
             <LeaderboardTable dataToDisplay={leaderboard} />
+
+            <h1>Today's Top 10</h1>
+            <LeaderboardTable dataToDisplay={todaysTop10} />
 
             <h1>Hall of Shame</h1>
             <HallOfShameTable dataToDisplay={worstPlayers} />
