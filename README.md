@@ -12,3 +12,7 @@ npm install
 npm run dev
 ```
 
+# How to play
+Press the keys, sort the squares
+
+![](https://github.com/v4rgas/sortEm/blob/main/readme/sortEm.gif)
