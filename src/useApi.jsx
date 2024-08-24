@@ -83,5 +83,19 @@ export default function useApi() {
         return data
     }
 
-    return { postTime, getLeaderboard, getAllUsernames, getNumberOfOnlinePlayers, getWorstPlayers, getBestTime, getTotalGamesPlayed };
+    async function postReferral(referral) {
+        if (import.meta.env.DEV) {
+            console.log('Mock postReferral:', { referral });
+            return Promise.resolve({ status: 'success', message: 'Referral posted (mock)' });
+        }
+        return fetch('https://sortem.sacowea.cl/api/referral', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ referral }),
+        });
+    }
+
+    return { postTime, getLeaderboard, getAllUsernames, getNumberOfOnlinePlayers, getWorstPlayers, getBestTime, getTotalGamesPlayed, postReferral };
 }
