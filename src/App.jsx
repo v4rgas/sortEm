@@ -117,28 +117,28 @@ function App() {
 
 
 
-  const swipeHandlers = useSwipeable({
-    onTouchStartOrOnMouseDown: () => setGameStarted(true),
-    onSwipedLeft: onLeftArrow,
-    onSwipedRight: onRightArrow,
-    onTap: onSelectionButton,
-  });
+  // const swipeHandlers = useSwipeable({
+  //   onTouchStartOrOnMouseDown: () => setGameStarted(true),
+  //   onSwipedLeft: onLeftArrow,
+  //   onSwipedRight: onRightArrow,
+  //   onTap: onSelectionButton,
+  // });
 
-  const longSwipeHandlers = useSwipeable({
-    onSwipedDown: onNewGame,
-    onSwipedUp: goToLeaderboard,
-    delta: 300
-  });
+  // const longSwipeHandlers = useSwipeable({
+  //   onSwipedDown: onNewGame,
+  //   onSwipedUp: goToLeaderboard,
+  //   delta: 300
+  // });
 
 
-  useEffect(() => {
-    swipeHandlers.ref(document);
-    longSwipeHandlers.ref(document);
-    return () => {
-      swipeHandlers.ref({});
-      longSwipeHandlers.ref({});
-    }
-  })
+  // useEffect(() => {
+  //   swipeHandlers.ref(document);
+  //   longSwipeHandlers.ref(document);
+  //   return () => {
+  //     swipeHandlers.ref({});
+  //     longSwipeHandlers.ref({});
+  //   }
+  // })
 
   useEffect(() => {
     const { blockArray, focusedBlockIndex } = generateInitialBlockArrayAndSelectedIndex();
@@ -159,7 +159,7 @@ function App() {
 
 
   return (
-    <>
+    <main>
       <MobileOnlyView>
         <span className='instructions' hidden={gameStarted}>
           Move left: swipe left; <br />
@@ -183,16 +183,28 @@ function App() {
 
       <Time started={gameStarted} ended={gameEnded}></Time>
 
-      <div className='flex'>
-        {blockArray.map((numbers, index) => (
-          <NumberBlock
-            key={index}
-            numbers={numbers}
-            selected={focusedBlockIndex == index && selected}
-            hovered={focusedBlockIndex == index && !selected}>
-          </NumberBlock>
-        ))}
+      <div className='grid'>
+        <div className='flex'>
+          {blockArray.map((numbers, index) => (
+            <NumberBlock
+              key={index}
+              numbers={numbers}
+              selected={focusedBlockIndex == index && selected}
+              hovered={focusedBlockIndex == index && !selected}>
+            </NumberBlock>
+          ))}
+        </div>
+
+        <MobileOnlyView>
+          <div className='mobile-action-buttons'>
+            <button onClick={onLeftArrow} >←</button>
+            <button onClick={onSelectionButton}>select</button>
+            <button onClick={onRightArrow}>→</button>
+          </div>
+
+        </MobileOnlyView>
       </div>
+
 
       <footer key={gameStarted} hidden={gameStarted && !gameEnded}>
         online players: {onlinePlayerCount}<br />
@@ -201,7 +213,7 @@ function App() {
         with a little help from a <a href="https://github.com/BrunoFarfan" target='_blank'>profit-driven crypto-bro</a>
         {themeStorage === 'dark' && <div>and dark mode made by an <a href="https://github.com/ElTioAndresCabezas" target='_blank'>adhd computer nerd</a></div>}
       </footer>
-    </>
+    </main>
 
 
   )

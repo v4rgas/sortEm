@@ -4,10 +4,13 @@
     font-weight: bold;
     background-color: var(--number-block-color);
     color: var(--text-primary);
+
     text-align: center;
     padding: 1rem;
     border-radius: 0.5rem;
+
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+
     flex-direction: row;
     display: flex;
     width: fit-content;

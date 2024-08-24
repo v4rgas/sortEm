@@ -7,6 +7,12 @@
   text-align: center;
 }
 
+.grid {
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  gap: 2rem;
+}
+
 body {
   background-color: var(--background);
   color: var(--text-primary)
@@ -58,5 +64,24 @@ a:visited {
 
 a:active {
   color: var(--hyperlink-text-color-active);
+}
 
+.mobile-action-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-action-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  width: 100%;
+  height: 100%;
+  background-color: var(--number-block-color);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  border: none;
 }
