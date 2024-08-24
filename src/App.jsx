@@ -54,11 +54,9 @@ function App() {
     setBlockArray(blockArray);
     setfocusedBlockIndex(focusedBlockIndex);
     if (isGameFinished(blockArray)) {
-      console.log('Game finished');
       setGameEnded(true);
       handleGameFinished();
     }
-    console.log(isGameFinished(blockArray));
   }
 
   const onRightArrow = () => {

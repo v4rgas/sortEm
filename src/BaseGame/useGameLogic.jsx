@@ -89,7 +89,7 @@ export default function useGameLogic() {
     const joinAdjacentBlocks = (blockArray, focusedBlockIndex) => {
         let newBlockArray = mergeAdjacentBlocks(blockArray);
         const currentSelectedBlockValue = blockArray[focusedBlockIndex][0];
-        console.log(blockArray, newBlockArray)
+
 
         const newfocusedBlockIndex = newBlockArray.findIndex((block) => block.includes(currentSelectedBlockValue));
 
@@ -180,7 +180,6 @@ export default function useGameLogic() {
     }
 
     const handleGameFinished = () => {
-        console.log('Game finished');
         playMp3(winSound);
     }
 

@@ -20,15 +20,12 @@ export default function Time({ started, ended }) {
     useEffect(() => {
         getBestTime().then((data) => {
             setBestTime(data.time / 1000);
-            console.log(data)
         });
     }, []);
 
 
 
     useEffect(() => {
-        console.log(started, ended);
-
         if (started && ended) {
             postTime(username, elapsedTime)
             getBestTime(50).then((data) => {
@@ -77,7 +74,7 @@ export default function Time({ started, ended }) {
         rgb = [255, 255 - redness, 255 - redness];
     }
     const rgbString = `rgb(${rgb.join(',')})`;
-    // console.log(rgbString);
+
 
 
 
