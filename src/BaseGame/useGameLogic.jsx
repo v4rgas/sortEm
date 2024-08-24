@@ -4,13 +4,17 @@ import clickSound2 from '../assets/keyboard/Audio 2.mp3';
 import clickSound3 from '../assets/keyboard/Audio 3.mp3';
 import clickSound4 from '../assets/keyboard/Audio 4.mp3';
 import clickSound5 from '../assets/keyboard/Audio 5.mp3';
+import { mutedAtom } from '../atoms';
 import selectionSound from '../assets/penclicks/Audio 1.mp3';
 import selectionSound2 from '../assets/penclicks/Audio 2.mp3';
 import selectionSound3 from '../assets/penclicks/Audio 3.mp3';
 import selectionSound4 from '../assets/penclicks/Audio 4.mp3';
+import { useAtom } from 'jotai';
 import winSound from '../assets/win.mp3';
 
 export default function useGameLogic() {
+    const [muted, setMuted] = useAtom(mutedAtom);
+
     function shuffleArray(array) {
         let a = [...array];
         let n = a.length;
@@ -43,8 +47,13 @@ export default function useGameLogic() {
     };
 
     function playMp3(audioSrc) {
+        if (muted) return;
         const audio = new Audio(audioSrc);
         audio.play();
+    }
+
+    function muteGameAudio() {
+        setMuted(!muted);
     }
 
     function playClickSound() {
@@ -186,6 +195,7 @@ export default function useGameLogic() {
         handleRightArrow,
         handleSelectionButton,
         isGameFinished,
-        handleGameFinished
+        handleGameFinished,
+        muteGameAudio,
     };
 }

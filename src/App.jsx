@@ -17,13 +17,19 @@ import { useSwipeable } from 'react-swipeable';
 function App() {
   const { getNumberOfOnlinePlayers, getTotalGamesPlayed } = useApi()
   const { generateInitialBlockArrayAndSelectedIndex,
-    handleLeftArrow, handleRightArrow, handleSelectionButton, isGameFinished, handleGameFinished } = useGameLogic();
+    handleLeftArrow,
+    handleRightArrow,
+    handleSelectionButton,
+    isGameFinished,
+    handleGameFinished,
+    muteGameAudio
+  } = useGameLogic();
 
   const [blockArray, setBlockArray, blockArrayRef] = useState([]);
   const [focusedBlockIndex, setfocusedBlockIndex, focusedBlockIndexRef] = useState(0);
   const [selected, setSelected, selectedRef] = useState(false);
-  const [gameStarted, setGameStarted, gameStartedRef] = useState(false);
-  const [gameEnded, setGameEnded, gameEndedRef] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameEnded, setGameEnded] = useState(false);
   const [onlinePlayerCount, setOnlinePlayerCount] = useState(1);
   const themeStorage = useAtomValue(themeAtom)
   const [totalGamesPlayed, setTotalGamesPlayed] = useState(2234);
@@ -105,6 +111,14 @@ function App() {
     onKeyPressed: goToLeaderboard
   });
 
+  useKeyboard({
+    key: ["m", "M"],
+    preventRepeat: true,
+    onKeyPressed: muteGameAudio
+  });
+
+
+
   const swipeHandlers = useSwipeable({
     onTouchStartOrOnMouseDown: () => setGameStarted(true),
     onSwipedLeft: onLeftArrow,
@@ -164,6 +178,7 @@ function App() {
           Move right: → or L or D<br />
           Select and drop: S or J <br />
           Restart: R <br />
+          Mute: M <br />
           Leaderboard: Space
         </span>
       </BrowserView>
