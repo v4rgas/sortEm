@@ -105,5 +105,15 @@ export default function useApi() {
         return data
     }
 
-    return { postTime, getLeaderboard, getAllUsernames, getNumberOfOnlinePlayers, getWorstPlayers, getBestTime, getTotalGamesPlayed, postReferral, getTodaysTop10 };
+    return {
+        postTime,
+        getLeaderboard,
+        getAllUsernames,
+        getNumberOfOnlinePlayers,
+        getWorstPlayers,
+        getBestTime,
+        getTotalGamesPlayed,
+        postReferral,
+        getTodaysTop10
+    };
 }
