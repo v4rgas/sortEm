@@ -197,9 +197,6 @@ function App() {
       <footer key={gameStarted} hidden={gameStarted && !gameEnded}>
         online players: {onlinePlayerCount}<br />
         total games played: {totalGamesPlayed} {"♥"} <br />
-        made by a <a href="https://github.com/v4rgas" target='_blank'>drug fueled atheist </a>
-        with a little help from a <a href="https://github.com/BrunoFarfan" target='_blank'>profit-driven crypto-bro</a>
-        {themeStorage === 'dark' && <div>and dark mode made by an <a href="https://github.com/ElTioAndresCabezas" target='_blank'>adhd computer nerd</a></div>}
       </footer>
     </>
 
