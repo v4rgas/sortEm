@@ -106,7 +106,7 @@ export default function Leaderboard() {
             </div>
 
             <h3>thank you for playing {"<3"}, <a
-                href={Math.random() < 0.1 ? "https://www.youtube.com/watch?v=CFVKdbiw9JE" : "https://github.com/v4rgas"}
+                href="https://github.com/v4rgas"
                 target='_blank'>
                 juan</a></h3>
 
