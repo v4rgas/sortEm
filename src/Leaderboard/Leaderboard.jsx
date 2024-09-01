@@ -61,10 +61,12 @@ export default function Leaderboard() {
     });
 
     const { ref } = useSwipeable({
-        onSwipedUp: () => {
+        onSwipedLeft: () => {
             navigate("/");
         },
-        delta: 300,
+        onSwipedRight: () => {
+            navigate("/");
+        },
     });
 
     useEffect(() => {
@@ -81,7 +83,7 @@ export default function Leaderboard() {
 
         <div className='center'>
             <MobileOnlyView>
-                <span>Long swipe up to go back</span>
+                <span>Swipe left or right to go back</span>
             </MobileOnlyView>
             <BrowserView>
                 <span>Press space to go back <br />

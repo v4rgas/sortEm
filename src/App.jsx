@@ -78,6 +78,21 @@ function App() {
     updateGameState(newGameState);
   }
 
+  const onSwipedLeft = () => {
+    if (!gameStarted)
+      goToLeaderboard();
+    else
+      onLeftArrow();
+  }
+
+  const onSwipedRight = () => {
+    if (!gameStarted)
+      goToLeaderboard();
+    else
+      onRightArrow();
+  }
+
+
 
   useKeyboard({
     key: ["ArrowRight", 'L', 'l', 'D', 'd'],
@@ -118,9 +133,8 @@ function App() {
 
 
   const swipeHandlers = useSwipeable({
-    onTouchStartOrOnMouseDown: () => setGameStarted(true),
-    onSwipedLeft: onLeftArrow,
-    onSwipedRight: onRightArrow,
+    onSwipedLeft,
+    onSwipedRight,
     onTap: onSelectionButton,
   });
 
@@ -162,11 +176,15 @@ function App() {
     <>
       <MobileOnlyView>
         <span className='instructions' hidden={gameStarted}>
-          Move left: swipe left; <br />
-          Move right: swipe right; <br />
+          Tap to start<br /><br />
+
+          Move left: swipe left <br />
+          Move right: swipe right <br />
           Select and drop: tap <br />
-          Restart: long swipe down <br />
-          Leaderboard: long swipe up
+          Restart: long swipe down <br /><br />
+
+          Leaderboard: swipe left or right<br />
+
         </span>
       </MobileOnlyView>
 
