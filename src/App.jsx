@@ -140,7 +140,6 @@ function App() {
 
   const longSwipeHandlers = useSwipeable({
     onSwipedDown: onNewGame,
-    onSwipedUp: goToLeaderboard,
     delta: 300
   });
 
