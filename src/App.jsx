@@ -1,13 +1,13 @@
 import './App.css'
 
 import { BrowserView, MobileOnlyView } from 'react-device-detect';
+import { Fragment, useEffect } from 'react';
 
 import NumberBlock from './BaseGame/NumberBlock'
 import Time from './Time';
 import { themeAtom } from './atoms';
 import useApi from './useApi';
 import { useAtomValue } from 'jotai';
-import { useEffect } from 'react';
 import useGameLogic from './BaseGame/useGameLogic';
 import { useKeyboard } from './BaseGame/useKeyboard';
 import { useNavigate } from 'react-router-dom';
@@ -141,10 +141,10 @@ function App() {
     delta: 300
   });
 
-
+  const mainElement = document.querySelector('main');
   useEffect(() => {
-    swipeHandlers.ref(document);
-    longSwipeHandlers.ref(document);
+    swipeHandlers.ref(mainElement);
+    longSwipeHandlers.ref(mainElement);
     return () => {
       swipeHandlers.ref({});
       longSwipeHandlers.ref({});
@@ -170,45 +170,48 @@ function App() {
 
 
   return (
-    <main>
-      <MobileOnlyView>
-        <span className='instructions' hidden={gameStarted}>
-          Tap to start<br /><br />
+    <Fragment>
+      <main>
+        <MobileOnlyView>
+          <span className='instructions' hidden={gameStarted}>
+            Tap to start<br /><br />
 
-          Move left: swipe left <br />
-          Move right: swipe right <br />
-          Select and drop: tap <br />
-          Restart: long swipe down <br /><br />
+            Move left: swipe left <br />
+            Move right: swipe right <br />
+            Select and drop: tap <br />
+            Restart: long swipe down <br /><br />
 
-          Leaderboard: swipe left or right<br />
+            Leaderboard: swipe left or right<br />
 
-        </span>
-      </MobileOnlyView>
+          </span>
+        </MobileOnlyView>
 
-      <BrowserView>
-        <span className='instructions' hidden={gameStarted && !gameEnded}>
-          Move left: ← or H or A <br />
-          Move right: → or L or D<br />
-          Select and drop: S or J <br />
-          Restart: R <br />
-          Mute: M <br />
-          Leaderboard: Space
-        </span>
-      </BrowserView>
+        <BrowserView>
+          <span className='instructions' hidden={gameStarted && !gameEnded}>
+            Move left: ← or H or A <br />
+            Move right: → or L or D<br />
+            Select and drop: S or J <br />
+            Restart: R <br />
+            Mute: M <br />
+            Leaderboard: Space
+          </span>
+        </BrowserView>
 
-      <Time started={gameStarted} ended={gameEnded}></Time>
+        <Time started={gameStarted} ended={gameEnded}></Time>
 
 
-      <div className='flex'>
-        {blockArray.map((numbers, index) => (
-          <NumberBlock
-            key={index}
-            numbers={numbers}
-            selected={focusedBlockIndex == index && selected}
-            hovered={focusedBlockIndex == index && !selected}>
-          </NumberBlock>
-        ))}
-      </div>
+        <div className='flex'>
+          {blockArray.map((numbers, index) => (
+            <NumberBlock
+              key={index}
+              numbers={numbers}
+              selected={focusedBlockIndex == index && selected}
+              hovered={focusedBlockIndex == index && !selected}>
+            </NumberBlock>
+          ))}
+        </div>
+
+      </main>
 
       <MobileOnlyView>
         <div className='mobile-action-buttons'>
@@ -218,13 +221,11 @@ function App() {
         </div>
       </MobileOnlyView>
 
-
-
       <footer key={gameStarted} hidden={gameStarted && !gameEnded}>
         online players: {onlinePlayerCount}<br />
         total games played: {totalGamesPlayed} {"♥"} <br />
       </footer>
-    </main>
+    </Fragment>
 
 
   )
