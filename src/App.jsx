@@ -78,6 +78,21 @@ function App() {
     updateGameState(newGameState);
   }
 
+  const onSwipedLeft = () => {
+    if (!gameStarted)
+      goToLeaderboard();
+    else
+      onLeftArrow();
+  }
+
+  const onSwipedRight = () => {
+    if (!gameStarted)
+      goToLeaderboard();
+    else
+      onRightArrow();
+  }
+
+
 
   useKeyboard({
     key: ["ArrowRight", 'L', 'l', 'D', 'd'],
@@ -115,30 +130,26 @@ function App() {
     onKeyPressed: muteGameAudio
   });
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft,
+    onSwipedRight,
+    onTap: onSelectionButton,
+  });
+
+  const longSwipeHandlers = useSwipeable({
+    onSwipedDown: onNewGame,
+    delta: 300
+  });
 
 
-  // const swipeHandlers = useSwipeable({
-  //   onTouchStartOrOnMouseDown: () => setGameStarted(true),
-  //   onSwipedLeft: onLeftArrow,
-  //   onSwipedRight: onRightArrow,
-  //   onTap: onSelectionButton,
-  // });
-
-  // const longSwipeHandlers = useSwipeable({
-  //   onSwipedDown: onNewGame,
-  //   onSwipedUp: goToLeaderboard,
-  //   delta: 300
-  // });
-
-
-  // useEffect(() => {
-  //   swipeHandlers.ref(document);
-  //   longSwipeHandlers.ref(document);
-  //   return () => {
-  //     swipeHandlers.ref({});
-  //     longSwipeHandlers.ref({});
-  //   }
-  // })
+  useEffect(() => {
+    swipeHandlers.ref(document);
+    longSwipeHandlers.ref(document);
+    return () => {
+      swipeHandlers.ref({});
+      longSwipeHandlers.ref({});
+    }
+  })
 
   useEffect(() => {
     const { blockArray, focusedBlockIndex } = generateInitialBlockArrayAndSelectedIndex();
@@ -162,11 +173,15 @@ function App() {
     <main>
       <MobileOnlyView>
         <span className='instructions' hidden={gameStarted}>
-          Move left: swipe left; <br />
-          Move right: swipe right; <br />
+          Tap to start<br /><br />
+
+          Move left: swipe left <br />
+          Move right: swipe right <br />
           Select and drop: tap <br />
-          Restart: long swipe down <br />
-          Leaderboard: long swipe up
+          Restart: long swipe down <br /><br />
+
+          Leaderboard: swipe left or right<br />
+
         </span>
       </MobileOnlyView>
 
@@ -208,9 +223,6 @@ function App() {
       <footer key={gameStarted} hidden={gameStarted && !gameEnded}>
         online players: {onlinePlayerCount}<br />
         total games played: {totalGamesPlayed} {"♥"} <br />
-        made by a <a href="https://github.com/v4rgas" target='_blank'>drug fueled atheist </a>
-        with a little help from a <a href="https://github.com/BrunoFarfan" target='_blank'>profit-driven crypto-bro</a>
-        {themeStorage === 'dark' && <div>and dark mode made by an <a href="https://github.com/ElTioAndresCabezas" target='_blank'>adhd computer nerd</a></div>}
       </footer>
     </main>
 

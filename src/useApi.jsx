@@ -32,7 +32,11 @@ export default function useApi() {
     async function getLeaderboard() {
         if (import.meta.env.DEV) {
             console.log('Mock getLeaderboard');
-            return Promise.resolve(generateMockLeaderboard(100));
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(generateMockLeaderboard(100));
+                }, 5000);
+            });
         }
         const response = await fetch('https://sortem.sacowea.cl/api/leaderboard', {
             method: 'GET',
