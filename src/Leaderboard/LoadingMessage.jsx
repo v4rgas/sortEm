@@ -17,6 +17,6 @@ export default function LoadingMessage() {
     }, []);
 
     return (
-        <h3>{loadingMessage}</h3>
+        <span>{loadingMessage}</span>
     );
 }
