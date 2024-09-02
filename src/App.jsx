@@ -183,27 +183,26 @@ function App() {
 
       <Time started={gameStarted} ended={gameEnded}></Time>
 
-      <div className='grid'>
-        <div className='flex'>
-          {blockArray.map((numbers, index) => (
-            <NumberBlock
-              key={index}
-              numbers={numbers}
-              selected={focusedBlockIndex == index && selected}
-              hovered={focusedBlockIndex == index && !selected}>
-            </NumberBlock>
-          ))}
-        </div>
 
-        <MobileOnlyView>
-          <div className='mobile-action-buttons'>
-            <button onClick={onLeftArrow} >←</button>
-            <button onClick={onSelectionButton}>select</button>
-            <button onClick={onRightArrow}>→</button>
-          </div>
-
-        </MobileOnlyView>
+      <div className='flex'>
+        {blockArray.map((numbers, index) => (
+          <NumberBlock
+            key={index}
+            numbers={numbers}
+            selected={focusedBlockIndex == index && selected}
+            hovered={focusedBlockIndex == index && !selected}>
+          </NumberBlock>
+        ))}
       </div>
+
+      <MobileOnlyView>
+        <div className='mobile-action-buttons'>
+          <button onClick={onLeftArrow} >←</button>
+          <button onClick={onSelectionButton}>select</button>
+          <button onClick={onRightArrow}>→</button>
+        </div>
+      </MobileOnlyView>
+
 
 
       <footer key={gameStarted} hidden={gameStarted && !gameEnded}>
