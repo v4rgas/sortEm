@@ -130,8 +130,6 @@ function App() {
     onKeyPressed: muteGameAudio
   });
 
-
-
   const swipeHandlers = useSwipeable({
     onSwipedLeft,
     onSwipedRight,
@@ -172,7 +170,7 @@ function App() {
 
 
   return (
-    <>
+    <main>
       <MobileOnlyView>
         <span className='instructions' hidden={gameStarted}>
           Tap to start<br /><br />
@@ -200,6 +198,7 @@ function App() {
 
       <Time started={gameStarted} ended={gameEnded}></Time>
 
+
       <div className='flex'>
         {blockArray.map((numbers, index) => (
           <NumberBlock
@@ -211,11 +210,21 @@ function App() {
         ))}
       </div>
 
+      <MobileOnlyView>
+        <div className='mobile-action-buttons'>
+          <button onClick={onLeftArrow} >←</button>
+          <button onClick={onSelectionButton}>select</button>
+          <button onClick={onRightArrow}>→</button>
+        </div>
+      </MobileOnlyView>
+
+
+
       <footer key={gameStarted} hidden={gameStarted && !gameEnded}>
         online players: {onlinePlayerCount}<br />
         total games played: {totalGamesPlayed} {"♥"} <br />
       </footer>
-    </>
+    </main>
 
 
   )
