@@ -1,7 +1,7 @@
 import './Leaderboard.css';
 
 import { BrowserView, MobileOnlyView } from "react-device-detect";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import HallOfShameTable from './HallOfShameTable';
 import LeaderboardTable from "./LeaderboardTable";
@@ -16,14 +16,17 @@ export default function Leaderboard() {
     const [worstPlayers, setWorstPlayers] = useState([]);
     const [players, setUsernames] = useState([]);
     const [todaysTop10, setTodaysTop10] = useState([])
+    const [loading, setLoading] = useState(true);
 
 
     const navigate = useNavigate()
 
 
     useEffect(() => {
+        setLoading(true);
         getLeaderboard().then((data) => {
             setLeaderboard(data);
+            setLoading(false);
         });
         getAllUsernames().then((data) => {
             setUsernames(data);
@@ -80,43 +83,47 @@ export default function Leaderboard() {
 
 
     return (
+        <Fragment>
+            {loading ? <div className='center'>Loading...</div> :
 
-        <div className='center'>
-            <MobileOnlyView>
-                <span>Swipe left or right to go back</span>
-            </MobileOnlyView>
-            <BrowserView>
-                <span>Press space to go back <br />
-                    Scroll: J,K or ↑,↓</span>
-            </BrowserView>
+                <div className='center'>
+                    <MobileOnlyView>
+                        <span>Swipe left or right to go back</span>
+                    </MobileOnlyView>
+                    <BrowserView>
+                        <span>Press space to go back <br />
+                            Scroll: J,K or ↑,↓</span>
+                    </BrowserView>
 
-            <h1>Top 50</h1>
+                    <h1>Top 50</h1>
 
-            <LeaderboardTable dataToDisplay={leaderboard} />
+                    <LeaderboardTable dataToDisplay={leaderboard} />
 
-            <h1>Today's Top 10</h1>
-            <LeaderboardTable dataToDisplay={todaysTop10} />
+                    <h1>Today's Top 10</h1>
+                    <LeaderboardTable dataToDisplay={todaysTop10} />
 
-            <h1>Hall of Shame</h1>
-            <HallOfShameTable dataToDisplay={worstPlayers} />
+                    <h1>Hall of Shame</h1>
+                    <HallOfShameTable dataToDisplay={worstPlayers} />
 
-            <h2>Celebrating the Most Amazing Players!</h2>
-            <div className="usernames">
-                {players.map(({ username }, i) => (
-                    username + " "
-                ))}
-            </div>
+                    <h2>Celebrating the Most Amazing Players!</h2>
+                    <div className="usernames">
+                        {players.map(({ username }, i) => (
+                            username + " "
+                        ))}
+                    </div>
 
-            <h3>thank you for playing {"<3"}, <a
-                href="https://github.com/v4rgas"
-                target='_blank'>
-                juan</a></h3>
+                    <h3>thank you for playing {"<3"}, <a
+                        href="https://github.com/v4rgas"
+                        target='_blank'>
+                        juan</a></h3>
 
-            <h2>Contributors</h2>
-            <span>backend contribution: <a href="https://github.com/BrunoFarfan" target='_blank'>bruno</a> </span>
-            <span>dark mode: <a href="https://github.com/ElTioAndresCabezas" target='_blank'>andrés</a></span>
+                    <h2>Contributors</h2>
+                    <span>backend contribution: <a href="https://github.com/BrunoFarfan" target='_blank'>bruno</a> </span>
+                    <span>dark mode: <a href="https://github.com/ElTioAndresCabezas" target='_blank'>andrés</a></span>
 
 
-        </div >
+                </div >
+            }
+        </Fragment>
     );
 }
