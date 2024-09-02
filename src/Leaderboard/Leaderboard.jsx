@@ -5,7 +5,7 @@ import { Fragment, useEffect, useState } from "react";
 
 import HallOfShameTable from './HallOfShameTable';
 import LeaderboardTable from "./LeaderboardTable";
-import loadingMessages from '../assets/loadingMessages.json'
+import LoadingMessage from './LoadingMessage';
 import useApi from "../useApi";
 import { useKeyboard } from "../BaseGame/useKeyboard";
 import { useNavigate } from "react-router-dom";
@@ -81,15 +81,10 @@ export default function Leaderboard() {
     }
     )
 
-    const getRandomLoadingMessage = () => {
-        return loadingMessages[Math.floor(Math.random() * loadingMessages.length
-        )]
-    }
-
 
     return (
         <Fragment>
-            {loading ? <div className='center'>{getRandomLoadingMessage()}</div> :
+            {loading ? <LoadingMessage /> :
 
                 <div className='center'>
                     <MobileOnlyView>

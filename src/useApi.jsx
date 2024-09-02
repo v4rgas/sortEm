@@ -35,8 +35,8 @@ export default function useApi() {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve(generateMockLeaderboard(100));
-                }, 500);
-            }); 
+                }, 5000);
+            });
         }
         const response = await fetch('https://sortem.sacowea.cl/api/leaderboard', {
             method: 'GET',
