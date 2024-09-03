@@ -72,8 +72,15 @@ a:active {
   gap: 1rem;
   width: 100%;
   margin-top: 2rem;
-  height: 6rem;
-  position: sticky;
+  height: 3rem;
+
+}
+
+.mobile-action-buttons-fixed {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  height: 7rem;
 }
 
 .mobile-action-buttons button {
