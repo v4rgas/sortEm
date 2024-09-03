@@ -221,7 +221,7 @@ function App() {
         </div>
       </MobileOnlyView>
 
-      <footer key={gameStarted} hidden={gameStarted && !gameEnded}>
+      <footer key={gameStarted} hidden={gameStarted}>
         online players: {onlinePlayerCount}<br />
         total games played: {totalGamesPlayed} {"♥"} <br />
       </footer>
