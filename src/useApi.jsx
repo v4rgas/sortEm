@@ -109,6 +109,14 @@ export default function useApi() {
         return data
     }
 
+    async function getLatestCommits(count) {
+        const response = await fetch('https://api.github.com/repos/v4rgas/sortEm/commits?per_page=' + count, {
+            method: 'GET',
+        });
+        const data = await response.json();
+        return data
+    }
+
     return {
         postTime,
         getLeaderboard,
@@ -118,6 +126,7 @@ export default function useApi() {
         getBestTime,
         getTotalGamesPlayed,
         postReferral,
-        getTodaysTop10
+        getTodaysTop10,
+        getLatestCommits,
     };
 }

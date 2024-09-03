@@ -5,6 +5,7 @@ import { StrictMode, useEffect } from 'react'
 
 import App from './App.jsx'
 import Home from './Home.jsx'
+import LatestUpdates from './LatestUpdates/LatestUpdates.jsx'
 import Leaderboard from './Leaderboard/Leaderboard.jsx'
 import Multiplayer from './Multiplayer.jsx'
 import Theme from './Theme.jsx'
@@ -27,6 +28,10 @@ const router = createBrowserRouter(
     {
       path: '/l',
       element: <Leaderboard />
+    },
+    {
+      path: '/u',
+      element: <LatestUpdates />
     }
   ], { basename: '/sortEm' }
 )
