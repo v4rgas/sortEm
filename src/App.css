@@ -80,7 +80,7 @@ a:active {
   position: absolute;
   bottom: 10px;
   left: 0;
-  height: 7rem;
+  opacity: 0.5;
 }
 
 .mobile-action-buttons button {
