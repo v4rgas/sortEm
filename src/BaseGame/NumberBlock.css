@@ -21,12 +21,11 @@
 }
 
 .hovered {
-
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color: var(--number-block-color-hovered);
+    background-color: var(--number-block-color-hovered) !important;
 }
 
 .selected {
-    background-color: var(--number-block-color-selected);
+    background-color: var(--number-block-color-selected) !important;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
 }
