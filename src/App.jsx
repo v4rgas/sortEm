@@ -214,11 +214,11 @@ function App() {
       </main>
 
       <MobileOnlyView>
-        <div className={`mobile-action-buttons ${gameStarted && 'mobile-action-buttons-fixed'}`}>
+        {gameStarted && <div className={'mobile-action-buttons mobile-action-buttons-fixed'}>
           <button onClick={onLeftArrow} >←</button>
           <button onClick={onSelectionButton}>select</button>
           <button onClick={onRightArrow}>→</button>
-        </div>
+        </div>}
       </MobileOnlyView>
 
       <footer key={gameStarted} hidden={gameStarted}>
