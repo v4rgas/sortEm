@@ -15,4 +15,4 @@ npm run dev
 # How to play
 Press the keys, sort the squares
 
-<img src="https://github.com/v4rgas/sortEm/blob/main/readme/sortEm.gif" />
+<img src="https://raw.githubusercontent.com/v4rgas/sortEm/main/readme/sortEm.gif" />
