@@ -32,7 +32,7 @@ function App() {
   const [gameEnded, setGameEnded] = useState(false);
   const [onlinePlayerCount, setOnlinePlayerCount] = useState(1);
   const themeStorage = useAtomValue(themeAtom)
-  const [totalGamesPlayed, setTotalGamesPlayed] = useState(2234);
+  const [totalGamesPlayed, setTotalGamesPlayed] = useState(11346);
 
 
 

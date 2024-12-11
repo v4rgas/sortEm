@@ -20,7 +20,7 @@ export default function useApi() {
             return Promise.resolve({ status: 'success', message: 'Time posted (mock)' });
         }
         const x = await encrypt(JSON.stringify({ username, time, moves: 0 }));
-        return fetch('https://sortem.sacowea.cl/api/leaderboard', {
+        return fetch('nothingfornow/api/leaderboard', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export default function useApi() {
                 }, 5000);
             });
         }
-        const response = await fetch('https://sortem.sacowea.cl/api/leaderboard', {
+        const response = await fetch('nothingfornow/api/leaderboard', {
             method: 'GET',
         });
         const data = await response.json();
@@ -47,7 +47,7 @@ export default function useApi() {
     }
 
     async function getAllUsernames() {
-        const response = await fetch('https://sortem.sacowea.cl/api/leaderboard/usernames', {
+        const response = await fetch('nothingfornow/api/leaderboard/usernames', {
             method: 'GET',
         });
         const data = await response.json();
@@ -55,7 +55,7 @@ export default function useApi() {
     }
 
     async function getNumberOfOnlinePlayers() {
-        const response = await fetch('https://sortem.sacowea.cl/api/leaderboard/active', {
+        const response = await fetch('nothingfornow/api/leaderboard/active', {
             method: 'GET',
         });
         const data = await response.json();
@@ -63,7 +63,7 @@ export default function useApi() {
     }
 
     async function getWorstPlayers() {
-        const response = await fetch('https://sortem.sacowea.cl/api/leaderboard/worst', {
+        const response = await fetch('nothingfornow/api/leaderboard/worst', {
             method: 'GET',
         });
         const data = await response.json();
@@ -72,7 +72,7 @@ export default function useApi() {
 
     async function getBestTime(pos) {
         pos = pos || 1;
-        const response = await fetch('https://sortem.sacowea.cl/api/leaderboard/best?position=' + pos, {
+        const response = await fetch('nothingfornow/api/leaderboard/best?position=' + pos, {
             method: 'GET',
         });
         const data = await response.json();
@@ -80,7 +80,7 @@ export default function useApi() {
     }
 
     async function getTotalGamesPlayed() {
-        const response = await fetch('https://sortem.sacowea.cl/api/leaderboard/total', {
+        const response = await fetch('nothingfornow/api/leaderboard/total', {
             method: 'GET',
         });
         const data = await response.json();
@@ -92,7 +92,7 @@ export default function useApi() {
             console.log('Mock postReferral:', { referral });
             return Promise.resolve({ status: 'success', message: 'Referral posted (mock)' });
         }
-        return fetch('https://sortem.sacowea.cl/api/referral', {
+        return fetch('nothingfornow/api/referral', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ export default function useApi() {
     }
 
     async function getTodaysTop10() {
-        const response = await fetch('https://sortem.sacowea.cl/api/leaderboard/today', {
+        const response = await fetch('nothingfornow/api/leaderboard/today', {
             method: 'GET',
         });
         const data = await response.json();
